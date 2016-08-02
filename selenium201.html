@@ -129,11 +129,22 @@
                 <div style="text-align:left;">
                     <img src="assets/images/agenda.png" style="border:none; background:none; width:80%">
                   </div>
+		<aside class="notes">
+		  <ul>
+		    <li>Advanced Script Writing</li>
+		    <li>Page Abstraction and Waits</li>
+		    <li>Advanced Application Intercations</li>
+		    <li>Set Up a Test Framework</li>
+		    <li>Parallelization</li>
+		    <li>Continuous Integration</li>
+		    <li>Selenium and CI Troubleshooting</li>
+		  </ul>
+		</aside>
               </section>
 
-<!-- Intro to SL Module-->
+<!--Adv. Scripts Module-->
               <section data-background="rgb(226, 35, 26)">
-                <h2>Introduction to Sauce Labs and Selenium</h2>
+                <h2>Advanced Script Writing</h2>
                 <aside class="notes">
 
                 </aside>
@@ -328,11 +339,11 @@
                     <p>If you want to learn more about running your own automated tests after the course today, feel free to take a look at the documentation page for that.</p>
                     <p>This is the official Selenium HQ documentation, where you can find helpful information about the syntax and usage of Selenium script directives and functions. Note that there is a language preference indicator up here at the top, to help facilitate syntax in the language that you are working with.</p>
                   </aside>
+		</section>
 
-				</section>
-<!--Selenium Scripts Basics Module-->
+		<!--Page Abstraction and Waits Module-->
                 <section data-background="rgb(226, 35, 26)">
-                  <h2>Selenium Test Script Basics</h2>
+                  <h2>Page Abstraction and Waits</h2>
                   <aside class="notes">
                   </aside>
                 </section>
@@ -628,9 +639,9 @@ WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
                 </section>
                 </section>
 
-<!-- Local Selenium Scripts Module-->
+<!--Adv. Application Interactions Module-->
                 <section data-background="rgb(226, 35, 26)">
-                  <h2>Write a Selenium Script</h2>
+                  <h2>Advanced Application Interactions</h2>
                 </section>
 
                 <section>
@@ -813,9 +824,9 @@ submitButton.submit();
                   </aside>
                 </section>
                 </section>
-<!-- Running a Selenium Script with Sauce Labs Module-->
+<!--Setup a test framework Module-->
                 <section data-background="rgb(226, 35, 26)">
-                  <h2>Testing with Sauce Labs</h2>
+                  <h2>Setting Up a Test Framework</h2>
                   <aside class="notes"> We will finally run the script on sauce labs, compare the methods, and discuss the benefits of running on Sauce Labs</aside>
                 </section>
 
@@ -1024,9 +1035,9 @@ WebElement messageElement = wait.until(
                 </section>
               </section>
 
-<!-- Introduction to Testing Frameworks-->
+	      <!--Parallelization Module-->
                 <section data-background="rgb(226, 35, 26)">
-                  <h2>Introduction to Testing Frameworks</h2>
+                  <h2>Parallelization</h2>
                   <aside class="notes">
                   </aside>
                 </section>
@@ -1282,14 +1293,28 @@ public void the_feeling_is(String arg1) throws Throwable {
                   </aside>
                 </section>
                 </section>
-                <!--Best Practices Module-->
+                <!--CI Module-->
 
                  <section data-background="rgb(226, 35, 26)">
-                   <h2>Testing Strategy and Best Practices</h2>
-                   <aside class="notes">General best practices, testing methodology</aside>
+                   <h2>Selenium Testing with Continuous Integration</h2>
                  </section>
 
                 <section>
+                  <h3>Module Objectives</h3>
+                  <p>This module enables you to:</p>
+                  <ul>
+                    <li>Understand testing strategies for setting up automated testing</li>
+                    <li>Label, name, and tag your tests to faciliate searching for past tests on Sauce Labs</li>
+                  </ul>
+                  <aside class="notes"></aside>
+                </section>
+
+		     <!--Troubleshooting/Best Practices Module-->
+		<section data-background="rgb(226, 35, 26)">
+                  <h2>Troubleshooting and Test Strategy</h2>
+                </section>
+
+		<section>
                   <h3>Module Objectives</h3>
                   <p>This module enables you to:</p>
                   <ul>
@@ -1311,48 +1336,6 @@ public void the_feeling_is(String arg1) throws Throwable {
                        <p>Atomic - The test makes clear exactly what it is that you're testing. If the test fails, then you should also have a very clear idea of what needs to be fixed. </p>
                        <p>Autonomous - Tests should not be dependent on the results of one test to run successfully. In addition, an autonomous test should use its own data to test against, and not create potential conflicts with other tests over the same data.  </p>
                      </aside>
-                </section>
-
-                <section>
-
-                  <section>
-                     <h3>Types of Testing</h3>
-                     <ul>
-                       <li>Unit Testing</li>
-                       <li>Functional Testing</li>
-                       <li>Performance Testing</li>
-                     </ul>
-                     <aside class="notes">
-                       <p>There are a few different kinds of testing. Sauce Labs doesn't cover them all, but it's important to know what Sauce Labs can and can't do.</p>
-                     </aside>
-                   </section>
-
-                   <section>
-                     <h3>Unit Testing</h3>
-                     <p>Unit tests are written from a developer persepective to ensure a menthod or function performs a set of tasks.</p>
-
-                     <aside class="notes">
-                       <p>Unit testing focuses on testing very small parts of the application, going down to the basic functions and methods</p>
-                     </aside>
-                   </section>
-
-                   <section>
-                     <h3>Functional Testing</h3>
-                     <p>Functional tests are written from a user perspective to test a functionality or feature of your application.</p>
-                     <aside class="notes">
-                       <p>Functional testing is what Sauce Labs offers to help faciliate and simplify for it's users.</p>
-                     </aside>
-                   </section>
-
-                   <section>
-                     <h3>Performance Testing</h3>
-                     <p>Performance tests that gauge and output performance metrics for your application.</p>
-                     <aside class="notes">
-                       <p>Performance testing serves to answer questions such as, can your application server handle a particular load, and does it behave as expected when you push it to its limit? These types of tests are better undertaken with a testing infrastructure that has been specifically developed for performance testing, so all baseline performance metrics are well established and understood before you start the test.</p>
-                       <p>Some eaxmples of performance testing helpers (similar to sauce labs):</p>
-
-                     </aside>
-                   </section>
                 </section>
 
                 <section>
@@ -1406,7 +1389,6 @@ public void the_feeling_is(String arg1) throws Throwable {
                     <aside class="notes"></aside>
                   </section>
                 </section>
-
 
                    <section>
                    <section>
@@ -1532,7 +1514,7 @@ caps.setCapability("name","Java Remote Sample Test");
                        </ol>
                        <aside class="notes">There's also a way to set your own build number as well</aside>
                      </section>
-
+		     
                  <section data-background="rgb(226, 35, 26)">
                    <h2>Additional Resources</h2>
                  </section>
