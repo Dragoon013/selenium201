@@ -1,6 +1,6 @@
 # Sauce Labs: Selenium101 Training Course
 
-You should be able to access the presentation at this location (temporarily) http://107.170.223.87/selenium101/selenium101.html
+You should be able to access the presentation at this location (temporarily) http://107.170.223.87/selenium201/selenium201.html
 
 ### Start Me!
 In order to bring up the presentation - there are couple of things you can do.
@@ -11,7 +11,7 @@ In order to bring up the presentation - there are couple of things you can do.
 #### Easy (if you have python installed):
 * go into the folder/direfctory in a terminal
 * run python -m SimpleHTTPServer
-* open a browser and go to localhost:8000/selenium101.html
+* open a browser and go to localhost:8000/selenium201.html
 
 #### Medium (if you have nginx installed):
 * go into the /etc/conf/conf.d directory
@@ -24,4 +24,4 @@ server {
 }
 
 * nginx -s reload
-* access the presentation at localhost:8000/selenium101.html
+* access the presentation at localhost:8000/selenium201.html
