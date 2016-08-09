@@ -246,48 +246,12 @@
 		<section>
 		  <h3>Hover</h3>
 		</section>
-				
-		<!--Page Abstraction and Waits Module-->
-                <section data-background="rgb(226, 35, 26)">
-                  <h2>Page Abstraction and Waits</h2>
-                  <aside class="notes">
-                  </aside>
-                </section>
 
-                <section>
-                  <h3>Module Objectives</h3>
-                  <p>This module enables you to:</p>
-                  <ul>
-                    <li>Understand and work with the concept of page objectification</li>
-                    <li>Understand and work with waits</li>
-                  </ul>
-                  <aside class="notes"></aside>
-                </section>
-
-		<section>
-                  <h3>Object Oriented Testing</h3>
-                  <p>Page Objects</p>
-                  <ul>
-                    <li>Code reuse across tests; reuse common element interactions</li>
-                    <li>Abstraction: With product change, only change one piece of code</li>
-                  </ul>
-                  <aside class="notes">
-                    <p>
-                      Sometimes we interact with particular elements in our application repeatedly. The nature of applications is that they change over time as well. Instead of writing the same code for the same interacctions, we can add a level of abstraction with page objects.
-                    </p>
-                  </aside>
+<!--Waits Module-->
+		<section data-background="rgb(226, 35, 26)">
+		  <h2>Advanced Waits</h2>
+		  
 		</section>
-
-		<section>
-		  <h3>Converting a Simple Script</h3>
-		  <p></p>
-		</section>
-
-		<section>
-		  <h3></h3>
-		  <p></p>
-		</section>
-
 		
               <section>
                   <h3>Explicit and Implicit Waits</h3>
@@ -321,6 +285,47 @@ WebElement messageElement = wait.until(
 
 	      </section>
 
+<!--Testing Frameworks and Page Abstraction Module-->
+                <section data-background="rgb(226, 35, 26)">
+                  <h2>Page Abstraction and Waits</h2>
+                  <aside class="notes">
+                  </aside>
+                </section>
+
+                <section>
+                  <h3>Module Objectives</h3>
+                  <p>This module enables you to:</p>
+                  <ul>
+                    <li>Understand and work with the concept of page objectification</li>
+                    <li>Understand and work with waits</li>
+                  </ul>
+                  <aside class="notes"></aside>
+                </section>
+
+		<section>
+                  <h3>Object Oriented Testing</h3>
+                  <p>Page Objects</p>
+                  <ul>
+                    <li>Code reuse across tests; reuse common element interactions</li>
+                    <li>Abstraction: With product change, only change one piece of code</li>
+                  </ul>
+                  <aside class="notes">
+                    <p>
+                      Sometimes we interact with particular elements in our application repeatedly. The nature of applications is that they change over time as well. Instead of writing the same code for the same interacctions, we can add a level of abstraction with page objects.
+                    </p>
+                  </aside>
+		</section>
+
+		<section>
+		  <h3>Converting a Simple Script</h3>
+		  <p>a few slides on this process and a lab</p>
+		</section>
+
+		<section>
+		  <h3>Browser Profiles</h3>
+		  <p></p>
+		</section>
+		
 	      <!--Adv. Application Interactions Module-->
                 <section data-background="rgb(226, 35, 26)">
 		  <h2>Advanced Application Interaction</h2>
@@ -332,134 +337,37 @@ WebElement messageElement = wait.until(
                   <ul>
                     <li>Perform advanced interactions on a page, beyond a simple click</li>
                   </ul>
-                  <aside class="notes">
-                    <p>Now we are going to take a look at doing a bit more with our script - We're going to take look at we can run a test that interacts with a page, rather than just check the title and return it's value.
-                    </p>
-                  </aside>
                 </section>
 
-                <section>
-                    <section>
-                      <h3>Identifying Elements</h3>
-                      <p style="text-align:center;">Locator Expressions are made in Key:Value pairs</p>
-                      <pre><code class="java" data-trim contenteditable>
-                          WebElement linkElement = driver.findElement(By.id("i am a link"));
-                      </code></pre>
-                      <aside class="notes">
-                        <p>We took a look at locating elements briefly in the pervious module, and now we have some examples on using some of the different locator types.</p>
-                        <p>Generally, locator expressions are made in Key:Value pairs. In our example here, the key is going to ID, and we are looking for the ID with the value "I am a link"</p>
-                      </aside>
-                    </section>
+		<section>
+		  <h3>Basic Authentication</h3>
+		  <p></p>
+		</section>
 
-                    <section style="padding-left:10px;">
-                      <h3>Locator Types</h3>
-                      <p>ID</p>
-                      <pre>
-                        <code class="java" data-trim contenteditable>
-                          driver.findElement(By.id("i_am_an_id")
-                        </code>
-                      </pre>
+		<section>
+		  <h3>Cookie Insertion</h3>
+		  <p></p>
+		</section>
+		
+		<section>
+		  <h3>File Uploads/Downloads</h3>
+		  <p></p>
+		</section>
 
-                      <p>Tag Name</p>
-                      <pre>
-                        <code class="java" data-trim contenteditable>
-                          driver.findElements(By.tagName("a"))
-                        </code>
-                      </pre>
-                    <p>Text</p>
-                    <pre>
-                      <code class="java" data-trim contenteditable>
-                        driver.findElements(By.linkText("i am a link"))
-                      </code>
-                    </pre>
-                    <aside class="notes">
-                      <p>We have a couple more additional examples here as well. We can find elements by tag name, for example by anchor tags, or by link text.</p>
-                      <p>Notice that there is findElement and findElements. findElements will return a list of matching elements found on the page.</p>
-                    </aside>
-                    </section>
+		<section>
+		  <h3>Alerts</h3>
+		</section>
+
+		<section>
+		  <h3>Popups</h3>
+		</section>
+		
+		<section>
+		  <h3>Drag and Drop</h3>
+		  <p>More?</p>
+		</section>
 
                 <section>
-                  <h3>Locator Types continued</h3>
-                  <p>CSS Selector</p>
-                  <pre>
-                    <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("input#submit"))
-                    </code>
-                  </pre>
-                  <p>XPath</p>
-                  <pre>
-                    <code class="java" data-trim contenteditable>
-                      driver.findElement(By.xpath("/html/head/title"))
-                    </code>
-                    <aside class="notes">
-                      <p>Another method we have is the CSS selector, which captures the path to the html element through the CSS path and definition.</p>
-                      <p>For those of you who are not familiar with XPATH, it is the language used to locate nodes in an XML doc. HTML can be an implementation of XHTML (XML), so you can use XPATH to locate elements on a page. Most people use the XPATH to locate an element because the element may not have an ID or name attribute to locate it easily.
-                      </p>
-                      <p>The danger in using XPATH and the CSS selector lies in how it finds elements, which is essentially <b>where</b> the element is in the hierarchy of the page. If that element moves during the development of the application, then your tests are at risk of breaking, if they XPATH. It's generally recommended to not use XPATHs unless you don't have any other choice.</p>
-                    </aside>
-                </section>
-                </section>
-
-                <section>
-                  <section>
-                    <h3>Performing an Action</h3>
-
-                    <div style="text-align:left;float:left;">
-                      <li>Once you locate an element, you can perform an action on it</li><p></p>
-                    <li>Perform actions by invoking interaction methods on the WebElement object we identified earlier</li>
-
-                  <div style="text-align:center;float:right;">
-                    <img src="assets/images/action.png" style="border:none; background:none; width:50%">
-                  </div>
-                  </div>
-
-                    <aside class="notes">It's common to see actions occur on webelements as they are identified; we can also store our identified element objects as variables and perform multiple actions on them through the test.</aside>
-                  </section>
-
-                  <section>
-                    <h3>Click</h3>
-                    <p>Find and Act</p>
-                    <pre><code class="java" data-trim contenteditable>
-                        driver.findElement(By.id("i am a link")).click();
-                    </code></pre>
-                    <p>Find, Store, and Act</p>
-                    <pre><code class="java" data-trim contenteditable>
-                        WebElement linkElement = driver.findElement(By.id("i am a link"));
-linkElement.click();
-                    </code></pre>
-
-                    <aside class="notes">
-                      <p>For short simple test scripts, finding an element and performning an action on it right away may be the best course of action.</p>
-                      <p>But typically, we store the element so then we can use it in multiple places in the script.</p>
-                      <p>Another reason we might want to store the element in an object, is to improve the script speed and latency. If we're making a bunch of queries to get the same object multiple times, that's the time it takes to send a command and the time it takes to recieve a response.</p>
-                      <p>In both of these examples, we are simply finding the link id'd by "I am a link", and clicking on it.</p>
-                    </aside>
-                  </section>
-
-                  <section>
-                    <h3>SendKeys</h3>
-                    <pre><code class="java" data-trim contenteditable>
-                        WebElement commentBox = driver.findElement(By.id("comments"));
-commentBox.sendKeys("I think this is a pretty cool training site!");
-                    </code></pre>
-                    <aside class="notes">
-                      <p>Another action method we can call is sendKeys. We can use sendKeys to input text into forms to make sure the fields are editable and data input is recorded on submit.</p>
-                    </aside>
-                  </section>
-
-                  <section>
-                    <h3>Submit</h3>
-                    <pre><code class="java" data-trim contenteditable>
-                        WebElement submitButton = driver.findElement(By.id("submit"));
-submitButton.submit();
-                    </code></pre>
-                    <aside class="notes">
-                      <p>And speaking of submit, we also have a submit method we can call, and here we are doing so on the button with id "submit".</p>
-                      <p>You can think of the submit like pressing the enter key.</p>
-                    </aside>
-                  </section>
-
-                  <section>
                     <h3>Other Actions</h3>
                     <li>Clear</li>
                     <li>Hover</li>
@@ -472,151 +380,6 @@ submitButton.submit();
                       <p>Anything you can think of doing on a web browser normally, you can tell Selenium to simulate in a test</p>
                     </aside>
                   </section>
-                </section>
-
-                <section data-state="lab">
-                  <h3>Example Lab</h3>
-                  <ol>
-                    <li>Open SampleSauceTest.java in the java-testng-simple project.</li>
-                    <li>If you have not done so, change the <pre style="display:inline">driver.get("URL")</pre> to <pre style="display:inline">driver.get("http://saucelabs.github.io/training-test-page/")</pre>.</li>
-                    <li>Comment out the drop-down (ham) id element locator and action.</li>
-                    <li>Open a new Chrome browser window and open the training test page site.</li>
-                    <li>Right click on the Comments box, choose Inspect. Notice in the Page Inspector, that the comments box id is "comments".</li>
-
-                  </ol>
-                  <aside class="notes">
-                    <p>Make sure you let the students know that they should watch you do it, then follow the steps themselves, after you show them.</p>
-                    <p>Make a point of the fact that they can use the training web page them selves when they are trying out new scripts with selenium.</p>
-                  </aside>
-                </section>
-
-<!--Setup a test framework Module-->
-                <section data-background="rgb(226, 35, 26)">
-                  <h2>Setting Up a Test Framework</h2>
-                </section>
-
-                <section>
-                  <h3>Module Objectives</h3>
-                  <p>This module enables you to:</p>
-                  <ul>
-		    <li>Set up a Selenium testing framework</li>
-		    <li></li>
-		  </ul>
-                  <aside class="notes"></aside>
-                </section>
-
-                <section>
-                  <h3>Testing Script Requirements</h3>
-                  <li>Remote WebDriver</li>
-                  <li>Sauce Labs Authentication (API)</li>
-                  <li>Desired Capabilities</li>
-                  <aside class="notes">
-                    <p>If your script is going to talk to Sauce Labs, then it needs a couple of things set first. One is the remote webdriver. This is the selenium webdriver object that facilitates commands sent to a remote browser on a selenium grid. Second, we'll need to authenticate with Sauce Labs. And lastly, we'll need to set the desired capabilities, which defines what browser and OS combination we will use.</p>
-                  </aside>
-                </section>
-
-                <section>
-                  <h3>Sauce Labs Authentication</h3>
-                  <p>The script uses the Sauce Labs API to authenticate the user, and record results against that user's profile</p>
-
-                  <div style="float:left;width:100%;" class="centered">
-                    <li>Environment Variables</li>
-                    <pre><code class="zsh" data-trim contenteditable>
-                        export SAUCE_USERNAME=dragoon013
-export SAUCE_ACCESS_KEY=b89rmvitnbiq3rrr09u4r90fjr
-                    </code></pre>
-                  </div>
-
-                  <div style="float:right;width:100%;padding-right:0px;">
-                    <li>Explicit Variables</li>
-                    <pre><code class="java" data-trim contenteditable>
-                        public static final String USERNAME = "dragoon013";
-public static final String ACCESS_KEY = "b89rmvitnbiq3rrr09u4r90fjr";
-                    </code></pre>
-                  </div>
-                  <aside class="notes">
-                    <p>One thing to consider when setting up your testing environment or suite, is to use Environment Variables for your credentials or explicitly state them in your script.</p>
-                    <p>Having environment variables with your credentials makes tests more re-usable among other team members. For example, they may be using their own credentials to log in and it doesn't run the risk of potential exposure of credentials.</p>
-                  </aside>
-                </section>
-
-                <section>
-                  <h3>Setting the Remote WebDriver</h3>
-                  <p style="text-align:center;">Sauce Labs API Authentication</p>
-                  <ul>
-                    <li>Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> <!--Empty spaces to get "Access code" on one line-->
-                    <li>Access Key</li>
-                    <li>API URL</li>
-                  </ul>
-                  <div style="float:right;width:107%;padding-right:0px;">
-                    <pre><code class="java" data-trim contenteditable>
-                        USERNAME = "dragoon013";
-KEY = "b89b7205-3aca-4af2-a618-9bab4c7bdebd";
-URL = "https://" + USERNAME + ":" + KEY + "@ondemand.saucelabs.com/wd/hub";
-WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
-                    </code></pre>
-                  </div>
-                  <aside class="notes">
-                    <p>Let's set up a RemoteWebDriver now. This is different, as the remotewebdriver calls out to a selenium grid somewhere; whether that is Sauce Labs or your own selenium grid, and runs the test on the remote browser/machine.</p>
-                  </aside>
-                </section>
-
-                <section>
-                  <h3>Desired Capabilities</h3> <!-- PLatform Configurator-->
-                  <div style="float:left;width:50%;" class="centered">
-                    <p>Required:</p>
-                    <li>Browser</li>
-                    <li>Platform</li>
-                    <li>Version</li>
-                    <p></p>
-                  </div>
-                  <div style="float:right;width:50%;padding-right:0px;">
-                    <p>Optional:</p>
-                    <li>Selenium Driver Version</li>
-                    <li>Chrome Driver Version</li>
-                    <li>IE Driver Version</li>
-                    <p></p>
-                  </div>
-                  <pre style="box-shadow:none;"><code class="java" data-trim contenteditable>
-                      DesiredCapabilities caps = DesiredCapabilities.chrome();
-caps.setCapability("platform", "Windows XP");
-caps.setCapability("version", "43.0");
-                  </code></pre>
-
-                  <aside class="notes">
-
-                    <p>Lastly, with Sauce Labs, we can set up the script to run the test on several different platforms. We aren't limited to what we have locally. If we want to test on many platform combinations at once, we need to use a framework.</p>
-                    <p>In general, the desired capabilities configures the meta settings for our test, like the browser, os, and version, but also can include other Sauce Labs, or even browser specifics configurations.</p>
-                    <p>These include disabling recording features in Sauce Labs, sending custom data (in JSON), or browser proxy options. We'll take a look at some desired capabilities features we can use with Sauce Labs, later on in the course.</p>
-                  </aside>
-                </section>
-
-              <section>
-                  <h3>Explicit and Implicit Waits</h3>
-
-                  <p>Implicit Waits</p>
-                  <pre>
-                    <code data-trim contenteditable class="java">
-                      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                    </code>
-                  </pre>
-
-                  <p>Explicit Waits</p>
-                  <div style="width:101%;">
-                    <pre><code class="java" data-trim contenteditable>
-                        import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-WebDriverWait wait = new WebDriverWait(driver, 10);
-WebElement messageElement = wait.until(
-                            ExpectedConditions.presenceOfElementLocated(
-                            By.id("loginResponse")));
-                    </code></pre>
-                  </div>
-
-                  <aside class="notes">
-                    There are many situations in which your test script may run ahead of the website or application you're testing, resulting in timeouts and a failing test. For example, you may have a dynamic content element that, after a user clicks on it, a loading appears for five seconds. If your script isn't written in such a way as to account for that five second load time, it may fail because the next interactive element isn't available yet. The general recommended solution for this is to use explicit waits.
-                  </aside>
-                </section>
 
 	      <!--Parallelization Module-->
                 <section data-background="rgb(226, 35, 26)">
@@ -634,65 +397,6 @@ WebElement messageElement = wait.until(
                     <li>Use a framework to record test results in Sauce Labs</li>
                   </ul>
                   <aside class="notes"></aside>
-                </section>
-
-                <section>
-                  <h3>What is a Testing Framework?</h3>
-                  <p></p>
-                  <p>A test automation framework is a scaffold comprised of libraries, dependecies, drivers, and helper scripts that facilitate the execution of Selenium test scripts.</p>
-                  <aside class="notes">
-                    <p>Ok, what does that mean? It's essentially just a bunch of additional libraries we can use in conjunction with our script for several cases:</p>
-                    <li>Record your data: Frameworks often have, or can have a way for you to output the results of your test scripts for you, rather than writing them by hand</li>
-                    <li>Talk to external applications: you can include external libraries in your framework to talk to and send results to places like Sauce Labs</li>
-
-                  </aside>
-                </section>
-
-                <section>
-                  <h3>Popular Frameworks</h3>
-
-                  <div style="float:left;width:50%;" class="centered">
-                    <p><strong>Java:</strong></p>
-                    <li>TestNG</li>
-                    <li>JUnit</li>
-
-                    <p><strong>Ruby:</strong></p>
-                    <li>RSpec</li>
-                    <li>Cucumber</li>
-                  </div>
-
-                  <div style="float:right;width:50%;padding-right:0px;">
-                    <p><strong>Python:</strong></p>
-                    <li>Robot</li>
-                    <li>UnitTest</li>
-
-                    <p><strong>JavaScript:</strong></p>
-                    <li>Protractor</li>
-                    <li>Nightwatch</li>
-
-                  </div>
-                  <aside class="notes">
-
-                    <p>JavaScript:</p>
-                    <li>Mocha</li>
-                    <li>Karma</li>
-                    <li>Jasmine</li>
-
-                    <p>PHP:</p>
-                    <li>PHPUnit</li>
-                    <li>Sausage</li>
-                    <li>Codeception</li>
-
-                    <p>C#:</p>
-                    <li>NUnit</li>
-                    <li>MSTest</li>
-
-                    <p>Perl:</p>
-                    <li>TestMore</li>
-
-                    <p>There are quite a few different frameworks out there. Sauce Labs has a github page with examples of scripts written using all of these frameworks.</p>
-
-                  </aside>
                 </section>
 
 		<section>
