@@ -180,10 +180,10 @@
                   <h3>Module Objectives</h3>
                   <p>This module enables you to:</p>
                   <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
+                    <li>Understand optimal locator strategy</li>
+                    <li>Write a script using lcoator strategy</li>
+                    <li>Understand and use the Selenium Actions class</li>
+		  </ul>
                   <aside class="notes"></aside>
                 </section>
 
@@ -289,8 +289,16 @@
 <!--Waits Module-->
 		<section data-background="rgb(226, 35, 26)">
 		  <h2>Advanced Waits</h2>
-		  
 		</section>
+
+		<section>
+                  <h3>Module Objectives</h3>
+                  <p>This module enables you to:</p>
+                  <ul>
+                    <li>Understand the different kinds of waits and when to use them</li>
+		  </ul>
+                  <aside class="notes"></aside>
+                </section>
 		
               <section>
                   <h3>Explicit and Implicit Waits</h3>
@@ -335,8 +343,8 @@ WebElement messageElement = wait.until(
                   <h3>Module Objectives</h3>
                   <p>This module enables you to:</p>
                   <ul>
+		    <li>Understand and use testing frameworks when writing test scripts</li>
                     <li>Understand and work with the concept of page objectification</li>
-                    <li>Understand and work with waits</li>
                   </ul>
                   <aside class="notes"></aside>
                 </section>
@@ -513,7 +521,8 @@ WebElement messageElement = wait.until(
                   <h3>Module Objectives</h3>
                   <p>This module enables you to:</p>
 		  <ul>
-		    <li></li>
+		    <li>Understand how to run your tests in parallel</li>
+		    <li>Undestand best practices for writing test scripts that facilitate parallel testing.</li>
 		  </ul>
                 </section>
 
@@ -568,9 +577,9 @@ WebElement messageElement = wait.until(
                   <h3>Module Objectives</h3>
                   <p>This module enables you to:</p>
                   <ul>
-                    <li>Setup a basic continuous integration environment</li>
-                    <li>Setup test reporting for CI systems</li>
-                  </ul>
+		    <li>Set a job in Jenkins to run your test scripts</li>
+		    <li>Setup test reporting for CI systems</li>
+		  </ul>
                   <aside class="notes"></aside>
                 </section>
 
@@ -630,204 +639,8 @@ WebElement messageElement = wait.until(
 		    <li>parse it?</li>
 		  </ol>
 		</section>
-					
-		<!--Troubleshooting/Best Practices Module-->
-		<section data-background="rgb(226, 35, 26)">
-                  <h2>Troubleshooting and Test Strategy</h2>
-                </section>
-
-		<section>
-                  <h3>Module Objectives</h3>
-                  <p>This module enables you to:</p>
-                  <ul>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                  <aside class="notes"></aside>
-                </section>
-
+		
                 <section>
-                  <section>
-                    <h3>Dependencies</h3>
-                    <p>Hard coding dependencies to access external account or data</p>
-                    <ul><li>Development and testing environments may change between the writing of your test scripts and when they run</li></ul>
-                    <ul><li>Security</li></ul>
-                    <aside class="notes">
-                      <p>We've talked about avoiding this a bit already, but there are some other dependencies for tests that need to be considered as well.</p>
-                      <p>Security we've talked about as well, we don't want to have a history of our credentials in a git history for example.</p>
-                    </aside>
-                  </section>
-
-                  <section>
-                    <h3>Setup</h3>
-                    <p>Setup initiates <i>prerequisite</i> tasks to be taken care of before your test runs, usually setting the capabilities, configuring additional browser parameters, and more.</p>
-
-                    <p>Example:</p>
-                    <pre><code class="java" data-trim contenteditable>
-                        public void setupLogin() {
-
-    DesiredCapabilities caps = new DesiredCapabilities();
-    caps.setCapability("platform", "Windows XP");
-    caps.setCapability("browserName", "Chrome");
-    caps.setCapability("version", "43.0");
-}
-                    </code></pre>
-
-                    <aside class="notes">
-                      <p>This can also include the desired capabilities and setting the WebDriver.</p>
-                    </aside>
-                  </section>
-
-                  <section>
-                    <h3>Teardown</h3>
-                    <p>The teardown function includes <i>Post requisite</i> tasks that need to occur, like closing the browser, logging out, or terminating the remote session.</p>
-                    <p>Example:</p>
-                    <pre><code class="java" data-trim contenteditable>
-                        public void tearDown(boolean testTrue) throws Exception {
-
-    webDriver.get().quit();
-
-    if (testTrue)) {
-        r.jobPassed(id);
-    } else {
-        r.jobFailed(id);
-    }
-}
-                    </code></pre>
-                    <aside class="notes"></aside>
-                  </section>
-                </section>
-
-                   <section>
-                   <section>
-                     <h3>Object Oriented Testing</h3>
-                     <p>Page Objects</p>
-                     <ul>
-                       <li>Code reuse across tests; reuse common element interactions</li>
-                     <li>Abstraction: With product change, only change one piece of code</li>
-                     </ul>
-                     <aside class="notes">
-                       <p>
-                         Sometimes we interact with particular elements in our application repeatedly. The nature of applications is that they change over time as well. Instead of writing the same code for the same interacctions, we can add a level of abstraction with page objects.
-                       </p>
-                     </aside>
-                   </section>
-
-                   <section>
-                     <h3>Abstracting Page Element Locators</h3>
-                     <pre><code class="jcva" data-trim contenteditable>
-
-@FindBy(id="i_am_a_textbox")
-private WebElement textInput;
-
-/*Set Page Object Actions*/
-
-public static GuineaPigPage getPage(WebDriver driver) {
-    return PageFactory.initElements(driver, GuineaPigPage.class);
-}
-
-public void enterCommentText(String text){
-    this.commentsTextAreaInput.click();
-    setTextAreaInputValue(this.commentsTextAreaInput, text);
-}
-                     </code></pre>
-                     <aside class="notes">
-                       <p>So in this example here, we are abtracting the locating, of the textbox, and the insertion of text into it. We're making the locating and sending it inputs all in one go, all in one object.</p>
-                     </aside>
-                   </section>
-
-                   <section>
-                     <h3>Page Object Example: Incorrect</h3>
-
-                     <pre><code class="java" data-trim contenteditable>
-                         public class Login {
-
-    public void testLogin() {
-        driver.type("inputBox", "testUser");
-        driver.type("password", "my supersecret password");
-        driver.click("sign-in");
-        driver.waitForPageToLoad("PageWaitPeriod");
-        Assert.assertTrue(driver.isElementPresent("compose button"),
-        "Login was unsuccessful");
-    }
-}
-                     </code></pre>
-
-                     <aside class="notes">
-                       <p>This example is incorrect because it doesn't have any abstraction! Everything is done explicitly.</p>
-                     </aside>
-                   </section>
-
-                   <section>
-                     <h3>Page Object Example: Correct</h3>
-                     <div style="width:109%;">
-                     <pre><code class="java" data-trim contenteditable>
-                         public class TestLogin {
-
-    public void testLogin() {
-        SignInPage signInPage = new SignInPage(selenium);
-        HomePage homePage = signInPage.loginValidUser("userName", "password");
-        Assert.assertTrue(driver.isElementPresent("compose button"),
-        "Login was unsuccessful");
-    }
-}
-                     </code></pre>
-                     </div>
-
-                     <aside class="notes">
-                       <p>This is a good example of abstraction. We've made the signin page into it's own object that we can now refer to, and do so on the next line, when we login, passing a username and password value.</p>
-                     </aside>
-                   </section>
-                   </section>
-
-                   <section>
-                     <h3>Parallelization</h3>
-                     <p>Avoid dependencies between tests</p>
-                     <ul><li>If you chain tests together, when one at the top fails, then they will all fail</li></ul>
-                     <p>Use Frameworks</p>
-                     <ul><li>Frameworks include helpful libraries and functionality that can help you make the most of parallelization</li></ul>
-                     <aside class="notes">
-                       <p>Running tests in parallel is the secret Sauce for accelerating your development process and creating a continuous integration/continuous delivery pipeline.</p>
-                       <p>One of the main features that Sauce Labs offers is parallelization, the ability to run serveral scripts at once on a variety of platforms. Since tests and commands are sent remotely, these tests take longer to run individually, but with parallelization, we can run them all at once. That is, we can start them all at the same time, which cuts down on the total time tests would normally take, saving time and money for your teams and business.</p>
-                       <p>It's good to avoid dependencies between tests. This goes along with the atomic testing strategy, where we want to create autonomous tests, so that they don't depend on each other, and when one fails, then we know exactly what failed.</p>
-                     </aside>
-                   </section>
-
-                     <section>
-                       <h3>Label Your Tests</h3>
-                       <p>
-                         <li>ID tests</li>
-                         <li>Name tests</li>
-                         <li>Apply build names to tests</li>
-                       </p>
-
-                       <pre><code class="java" data-trim contenteditable>
-                           caps.setCapability("tags","tag_awesome");
-caps.setCapability("build","cool_builds1");
-caps.setCapability("name","Java Remote Sample Test");
-                       </code></pre>
-                       <p style="text-align:center;">Docs: <a href="https://wiki.saucelabs.com/display/DOCS/Test+Configuration+Options" target="_blank">Test Configuration Options</a></p>
-                       <aside class="notes"></aside>
-                     </section>
-
-                     <section data-state="lab">
-                       <h3>Lab 7: Labelling and Naming our Tests</h3>
-                       <ol>
-                         <li>In Eclipse, open jjava.testng-simple > com.yourcompany >SampleSRCTest.java</li>
-                         <li>Add a capability to name your test</li>
-                         <li>Add a capability to include a build number for your test</li>
-                         <li>Add a capability to include a tag for your test</li>
-                         <li>Run the test script</li>
-                         <li>Open saucelabs.com. How does your test look different on the Automated Tests tab?</li>
-                       </ol>
-                       <aside class="notes">There's also a way to set your own build number as well</aside>
-                     </section>
-		     
-                 <section data-background="rgb(226, 35, 26)">
-                   <h2>Additional Resources</h2>
-                 </section>
-
-                 <section>
                   <h3>Further Information</h3>
                   <li><a href="http://www.seleniumhq.org/docs" target="_blank">SeleniumHQ: Documentation</a></li>
                   <li><a href="http://elementalselenium.com/" target="_blank">Dave Haeffner's Selenium Newsletter</a></li>
