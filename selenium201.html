@@ -203,6 +203,12 @@
 		</section>
 
 		<section>
+		  <h3>How Selenium Works</h3>
+		  <p>How Selenium interacts with the DOM</p>
+		  <p>What you can and can't do with selenium.</p>
+		</section>
+		
+		<section>
 		  <h3>Locators Review</h3>
 		  <p></p>
 		</section>
@@ -217,9 +223,22 @@
 
 		<section>
 		  <h3>XPATH vs. CSS</h3>
-		  <p></p>
+		  <p>about speeds. about text</p>
 		</section>
 
+		<section>
+		  <h3>Accessibility Testing</h3>
+		  <p>ex: yahoo mail needs to work for those who are visually impaired? IDK how</p>
+		</section>
+		
+		<section data-state="lab">
+		  <h3>Lab 1: Locators</h3>
+		  <ol>
+		    <li>Write Locators bt ID, CSS and XPAth</li>
+		    <li>Maybe do a speedtest demo here. (ex: cat paws)</li>
+		  </ol>
+		</section>
+		
 		<section>
 		  <h3>Actions Review</h3>
 		  <p></p>
@@ -227,7 +246,7 @@
 
 		<section>
 		  <h3>Actions Class</h3>
-		  <p></p>
+		  <p>Limited for particular browser versions</p>
 		</section>
 
 		<section>
@@ -247,6 +266,26 @@
 		  <h3>Hover</h3>
 		</section>
 
+		<section>
+		  <h3>Drag and Drop</h3>
+		  <p>More?</p>
+		</section>
+
+		<section>
+		  <h3>Focus</h3>
+		</section>
+
+		<section>
+		  <h3>Selenium JS Executor</h3>
+		</section>
+
+		<section>
+		  <h3>Lab 2: Actions</h3>
+		  <ol>
+		    <li>write a couple actions</li>
+		  </ol>
+		</section>
+				
 <!--Waits Module-->
 		<section data-background="rgb(226, 35, 26)">
 		  <h2>Advanced Waits</h2>
@@ -281,13 +320,13 @@ WebElement messageElement = wait.until(
               </section>
 
 	      <section>
-		<h3>Advanced Waits</h3>
+		<h3>Fluent Waits</h3>
 
 	      </section>
 
 <!--Testing Frameworks and Page Abstraction Module-->
                 <section data-background="rgb(226, 35, 26)">
-                  <h2>Page Abstraction and Waits</h2>
+                  <h2>Testing Frameworks and Page Abstraction</h2>
                   <aside class="notes">
                   </aside>
                 </section>
@@ -301,7 +340,84 @@ WebElement messageElement = wait.until(
                   </ul>
                   <aside class="notes"></aside>
                 </section>
+		
+	        <section>
+		  <h3>What is a Testing Framework?</h3>
+                  <p></p>
+                  <p>A test automation framework is a scaffold comprised of libraries, dependecies, drivers, and helper scripts that facilitate the execution of Selenium test scripts.</p>
+                  <aside class="notes">
+                    <p>Ok, what does that mean? It's essentially just a bunch of additional libraries we can use in conjunction with our script for several cases:</p>
+                    <li>Record your data: Frameworks often have, or can have a way for you to output the results of your test scripts for you, rather than writing them by hand</li>
+                    <li>Talk to external applications: you can include external libraries in your framework to talk to and send results to places like Sauce Labs</li>
 
+                  </aside>
+                </section>
+
+                <section>
+                  <h3>Popular Frameworks</h3>
+
+                  <div style="float:left;width:50%;" class="centered">
+                    <p><strong>Java:</strong></p>
+                    <li>TestNG</li>
+                    <li>JUnit</li>
+
+                    <p><strong>Ruby:</strong></p>
+                    <li>RSpec</li>
+                    <li>Cucumber</li>
+                  </div>
+
+                  <div style="float:right;width:50%;padding-right:0px;">
+                    <p><strong>Python:</strong></p>
+                    <li>Robot</li>
+                    <li>UnitTest</li>
+
+                    <p><strong>JavaScript:</strong></p>
+                    <li>Protractor</li>
+                    <li>Nightwatch</li>
+
+                  </div>
+                  <aside class="notes">
+
+                    <p>JavaScript:</p>
+                    <li>Mocha</li>
+                    <li>Karma</li>
+                    <li>Jasmine</li>
+
+                    <p>PHP:</p>
+                    <li>PHPUnit</li>
+                    <li>Sausage</li>
+                    <li>Codeception</li>
+
+                    <p>C#:</p>
+                    <li>NUnit</li>
+                    <li>MSTest</li>
+
+                    <p>Perl:</p>
+                    <li>TestMore</li>
+
+                    <p>There are quite a few different frameworks out there. Sauce Labs has a github page with examples of scripts written using all of these frameworks.</p>
+
+                  </aside>
+                </section>
+
+		<section>
+		  <h3>TestNG</h3>
+		  
+		</section>
+		
+		<section>
+		  <h3>Browser Profiles</h3>
+		  <p></p>
+		</section>
+
+		<section data-state:"lab">
+		  <h3>Lab 3: More Actions/Framework</h3>
+		  <ol>
+		    <li>intro new script with all actions included, but with more frameworkiness</li>
+		    <li>go through how the pom.xml works, other dependencies (maven)</li>
+		  </ol>
+		</section>
+		
 		<section>
                   <h3>Object Oriented Testing</h3>
                   <p>Page Objects</p>
@@ -321,11 +437,14 @@ WebElement messageElement = wait.until(
 		  <p>a few slides on this process and a lab</p>
 		</section>
 
-		<section>
-		  <h3>Browser Profiles</h3>
-		  <p></p>
+		<section data-state="lab">
+		  <h3>Lab 4: I'm More than Just an Object</h3>
+		  <ol>
+		    <li>Convert a simple script into one that ismore abstracted.</li>
+		    <li>maybe start with original, and one that is partially complete - have them examine side by side and complete the partially finished abstracted script.</li>
+		  </ol>
 		</section>
-		
+
 	      <!--Adv. Application Interactions Module-->
                 <section data-background="rgb(226, 35, 26)">
 		  <h2>Advanced Application Interaction</h2>
@@ -362,11 +481,6 @@ WebElement messageElement = wait.until(
 		  <h3>Popups</h3>
 		</section>
 		
-		<section>
-		  <h3>Drag and Drop</h3>
-		  <p>More?</p>
-		</section>
-
                 <section>
                     <h3>Other Actions</h3>
                     <li>Clear</li>
@@ -381,6 +495,13 @@ WebElement messageElement = wait.until(
                     </aside>
                   </section>
 
+		<section data-state="lab">
+		  <h3>Lab 5: Advanced Page Interactions</h3>
+		  <ol>
+		    <li>cookie insertion for oauth</li>
+		  </ol>
+		</section>
+		
 	      <!--Parallelization Module-->
                 <section data-background="rgb(226, 35, 26)">
                   <h2>Test Parallelization</h2>
@@ -397,10 +518,30 @@ WebElement messageElement = wait.until(
                 </section>
 
 		<section>
-		  <h3>What is Paralleization?</h3>
+		  <h3>What is Parallelization?</h3>
 		  <p>How does it fit into CI/CD?</p>
 		</section>
 
+		<section>
+		  <section>
+		    <h3>Parallelization Requirements</h3>
+		  </section>
+		  
+		  <section>
+                    <h3>Small, Atomic, and Autonomous Testing</h3>
+                    <p>Small: Tests should be short and succinct</p>
+                    <p>Atomic: Tests should focus on testing a single feature.</p>
+                    <p>Autonomous: Tests should be independent of other tests.</p>
+		    
+                    <aside class="notes">
+		      
+                      <p>Short - If you have a test suite of 100 tests running concurrently on 100 VMs, then the time it will take to run the entire suite will be determined by the longest/slowest test case. Keeping your tests small ensures that your suite will run efficiently and provide you with results faster. </p>
+                      <p>Atomic - The test makes clear exactly what it is that you're testing. If the test fails, then you should also have a very clear idea of what needs to be fixed. </p>
+                      <p>Autonomous - Tests should not be dependent on the results of one test to run successfully. In addition, an autonomous test should use its own data to test against, and not create potential conflicts with other tests over the same data.  </p>
+                    </aside>
+                  </section>
+		</section>
+		
 		<section>
 		  <h3>Two ways to run in Parallel</h3>
 		  <li>Cross browser</li>
@@ -409,22 +550,14 @@ WebElement messageElement = wait.until(
 		  <p>Can combine these too!</p>
 		</section>
 
-		<section>
-		  <h3>Sauce Runner</h3>
-		  <aside class="notes">
-		    Sauce Runner is currently in Beta, with support for these testing frameworks:
-		    Java: TestNG & Junit
-		    Python: Py.test
-		    Ruby: Rspec, Capybara, WatirWebdriver
-		    Javascript: Protractor
-		  </aside>
+		<section data-state="lab">
+		  <h3>Lab 6: Parallelization Lab</h3>
+		  <ol>
+		    <li>add more @test annotated blocks</li>
+		    <li>make script run on more browser/OS combos</li>
+		  </ol>
 		</section>
-
-		<section>
-		  <h3>Cross Browser Testing</h3>
-		  <p>Using the Testing the framework to help you out</p>
-		</section>
-		
+				
                 <!--CI Module-->
 
                  <section data-background="rgb(226, 35, 26)" style="width:110%">
@@ -469,8 +602,11 @@ WebElement messageElement = wait.until(
 		</section>
 
 		<section data-state="lab">
-		  <h3>Lab: Setting up CI env.</h3>
-		  
+		  <h3>Lab 7: CI/CD</h3>
+		  <ol>
+		    <li>Set up a job using Jenkins and Sauce Labs</li>
+		    
+		  </ol>
 		</section>
 
 		<section>
@@ -484,14 +620,17 @@ WebElement messageElement = wait.until(
 		</section>
 		
 		<section>
-		  <h3>Selenium JS Executor</h3>
-		</section>
-
-		<section>
 		  <h3>Sauce REST API</h3>
 		</section>
-			
-		
+
+		<section data-state="lab">
+		  <h3>Lab 8: CI/CD Reporting</h3>
+		  <ol>
+		    <li>Look at the report from the previous job.</li>
+		    <li>parse it?</li>
+		  </ol>
+		</section>
+					
 		<!--Troubleshooting/Best Practices Module-->
 		<section data-background="rgb(226, 35, 26)">
                   <h2>Troubleshooting and Test Strategy</h2>
@@ -505,20 +644,6 @@ WebElement messageElement = wait.until(
                     <li></li>
                   </ul>
                   <aside class="notes"></aside>
-                </section>
-
-                <section>
-                     <h3>Small, Atomic, and Autonomous Testing</h3>
-                     <p>Small: Tests should be short and succinct</p>
-                     <p>Atomic: Tests should focus on testing a single feature.</p>
-                     <p>Autonomous: Tests should be independent of other tests.</p>
-
-                     <aside class="notes">
-
-                       <p>Short - If you have a test suite of 100 tests running concurrently on 100 VMs, then the time it will take to run the entire suite will be determined by the longest/slowest test case. Keeping your tests small ensures that your suite will run efficiently and provide you with results faster. </p>
-                       <p>Atomic - The test makes clear exactly what it is that you're testing. If the test fails, then you should also have a very clear idea of what needs to be fixed. </p>
-                       <p>Autonomous - Tests should not be dependent on the results of one test to run successfully. In addition, an autonomous test should use its own data to test against, and not create potential conflicts with other tests over the same data.  </p>
-                     </aside>
                 </section>
 
                 <section>
