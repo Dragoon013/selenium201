@@ -209,27 +209,72 @@
 		</section>
 
 		<section>
-		  <h3>How Selenium Works</h3>
-		  <p>How Selenium interacts with the DOM</p>
-		  <p>What you can and can't do with selenium.</p>
+		    <h3>Selenium Architecture</h3>
+		    
+		    <div class="fragment" data-fragment-index="3" style="vertical-align:left; margin-left: auto; margin-right: auto;">
+		      <img src="assets/images/webdriver.png" style="border:0; background:none; width:23%">
+		    </div>
+		    <div class="fragment" data-fragment-index="2" style="vertical-align:left; margin-left: auto; margin-right: auto;">
+		      <img src="assets/images/atoms.png" style="border:0; background:none; width:19%">
+		    </div>
+		    <div class="fragment" data-fragment-index="1" style="vertical-align:left; margin-left: auto; margin-right: auto;">
+		      <img src="assets/images/closure.png" style="border:0; background:none; width:20%">
+		  </div>
+		    <aside class="notes">
+		      <p></p>
+		    </aside>
 		</section>
 		
 		<section>
 		  <h3>Locators Review</h3>
-		  <p></p>
+		  <p style="text-align:center;">Locator Expressions are made in Key:Value pairs</p>
+                  <pre><code class="java" data-trim contenteditable>
+                          WebElement linkElement = driver.findElement(By.id("i am a link"));
+                  </code></pre>
+                  <aside class="notes">
+		    <p>Before we get into the really advanced topics, this is just a reminder that locators are generally made by using key value pairs.</p>
+		    <p>In our example here, the key is going to ID, and we are looking for the ID with the value "I am a link"</p>
+                  </aside>
 		</section>
 
 		<section>
-		  <h3>XPATH</h3>
-		  <p></p>
+		  <h3>Locator Types</h3>
+		  <p>Identify by:</p>
+                  <div style="float:left;width:50%;" class="centered">
+		    <ul>
+		      <li>ID</li>
+                      <li>Class Name</li>
+                      <li>Tag Name</li>
+                      <li>Name</li>
+		    </ul>
+		  </div>
+                  <div style="float:right;width:50%;padding-right:0px;">
+		    <ul>
+		      <li>Link Text</li>
+                      <li>Partial Linktext</li>
+                      <li>CSS</li>
+                      <li>XPath</li>
+		    </ul>
+		  </div>
 		  <aside class="notes">
-		    <p>How to use xpath - the proper way</p>
+		    <p>There are a decent amount of identifiers out there. Most of them are easy to use, but there are two that consistently are touted by people in the selenium community, CSS and XPATH.</p>
+		    <p>There is a contention that XPATH is slower that CSS, but tests done by others, including dave haeffner of elemental selenium, has shown in a series of tests that there is no major difference. So at the end of the day, it comes down to how you can use it and how you can't, as well as preferrence.</p>
 		  </aside>
 		</section>
-
+		
 		<section>
-		  <h3>XPATH vs. CSS</h3>
-		  <p>about speeds. about text</p>
+		  <h3>XPATH vs CSS</h3>
+		  <p>XPATH</p>
+		  <ul>
+		    <li>Can traverse the DOM from child to parent element. (Forwards and backwards)</li>
+		  </ul>
+		  <p>CSS</p>
+		  <ul>
+		    <li>Can only traverse the DOM from parent to child element.</li>
+		  </ul>
+		  <aside class="notes">
+		    <p></p>
+		  </aside>
 		</section>
 
 		<section>
