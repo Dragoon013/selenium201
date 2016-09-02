@@ -261,25 +261,51 @@
 		    <p>There is a contention that XPATH is slower that CSS, but tests done by others, including dave haeffner of elemental selenium, has shown in a series of tests that there is no major difference. So at the end of the day, it comes down to how you can use it and how you can't, as well as preferrence.</p>
 		  </aside>
 		</section>
-		
-		<section>
-		  <h3>XPATH vs CSS</h3>
-		  <p>XPATH</p>
-		  <ul>
-		    <li>Can traverse the DOM from child to parent element. (Forwards and backwards)</li>
-		  </ul>
-		  <p>CSS</p>
-		  <ul>
-		    <li>Can only traverse the DOM from parent to child element.</li>
-		  </ul>
-		  <aside class="notes">
-		    <p></p>
-		  </aside>
-		</section>
 
 		<section>
-		  <h3>Accessibility Testing</h3>
-		  <p>ex: yahoo mail needs to work for those who are visually impaired? IDK how</p>
+		  <h3>Locator Strategy</h3>
+		  <ol>
+		    <li>ID and Name</li>
+		    <li>Classes and CSS Selectors</li>
+		    <li>XPATH</li>
+		  </ol>
+		  
+		  <aside class="notes">
+		    <p>So what's the best way to actually write and identify locators on a page? Like with much of Selenium and testing in general, it depends on how your application or site is laid out, in the html and css.</p>
+		    <p>Generally, lcoating elements through their specific name or id is going to be the fastest method. But that can be a fantasy as far as modern web applications go. Second, you'd try to use the classes and then CSS Selectors. And finally, you'd want to use the XPATH. The XPATH selector is generally the locator of last resort due to its brittleness and slow speed on some specific browsers. Otherwise CSS Selectors will generally work out fine. </p>
+		  </aside>
+		</section>
+		
+		<section>
+		  <section>
+		    <h3>XPATH vs CSS</h3>
+		    <p>XPATH</p>
+		    <ul>
+		      <li>Can traverse the DOM from child to parent element. (Forwards and backwards)</li>
+		    </ul>
+		    <p>CSS</p>
+		    <ul>
+		      <li>Can only traverse the DOM from parent to child element.</li>
+		      <li>Has a number of selectors for precise location</li>
+		    </ul>
+		    <aside class="notes">
+		      <p></p>
+		    </aside>
+		  </section>
+
+		  <section>
+		    <h3>XPATH vs CSS - Which is faster?</h3>
+		    <ul>
+		      <p>The answer is - it depends!</p>
+		      <li>XPATH tends to be faster on IE</li>
+		      <li>CSS tends to be faster on all other browsers</li>
+		      <p>Best choice is to use ID and Classes, which will be faster than traversing the DOM with CSS and XPATH selectors.</p>
+		    </ul>
+		    <aside class="notes">
+		      <p>There has been a debate for quite a while now on the merits of CSS vs xpath. All the benchmark tests that I've seen show that CSS is generally faster. But faster only means a couple of microseconds on most browsers.</p>
+		      <p>The hazard in using either one of these is that they generally depend on the hierarchy of the html on the page itself to locate elements. If your developers make a chnage in where an element is located, these locators can break pretty easily. Convince them to ID and name elements instead!</p>
+		    </aside>
+		  </section>
 		</section>
 		
 		<section data-state="lab">
@@ -292,44 +318,154 @@
 		
 		<section>
 		  <h3>Actions Review</h3>
-		  <p></p>
+                  <pre>
+                    <code class="java" data-trim contenteditable style="text-align:center;">
+                      driver.findElement(By.name("query")).sendKeys("actions");
+                    </code>
+                  </pre>
+		  <aside class="notes">
+		    <p>Actions work the same way that they always have. You locate an element, and then you can perform one of the standard clicks, submits, sendkeys on that located element.</p>
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Actions Class</h3>
-		  <p>Limited for particular browser versions</p>
+		  <pre>
+                    <code class="java" data-trim contenteditable style="text-align:center;">
+		      Actions action = new Actions(driver);
+		    </code>
+		  </pre>
+		  <ul>
+		    <li>Limited for particular browser versions</li>
+		    <li>Allows you to chain together actions</li>
+		    <li>Provides additional directives for precise keyboard and mouse operations</li>
+		  </ul>
+		  <aside class="notes">
+		    <p>This is similar to TouchActions class that is used in Appium test scripts. In fact, TouchAction inherits from this class (touchaction is a subclass).</p>
+		  </aside>
 		</section>
 
 		<section>
-		  <h3>Multiple Actions</h3>
-		  <p></p>
+		  <h3>Chaining Actions</h3>
+		  <pre>
+                    <code class="java" data-trim contenteditable>
+		      WebElement button = driver.findElement(By.id("button1"));
+		      
+Actions action = new Actions(driver);
+		      
+action.contextClick(button).build().perform();
+		    </code>
+		  </pre>
+		  <p>Chain actions together to make a consolidated action object</p>
+		  <aside class="notes">
+
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Keyboard Interactions</h3>
+		  <p>The Keyboard interactions class is used by the Actions class but is unstable when used its own.</p>
+		  <p>Some of the actions from the Keyboard interface:</p>
+		  <ul>
+		    <li><pre style="display:inline;">pressKey(keys)</pre></li>
+		    <li><pre style="display:inline;">releaseKey(keys)</pre></li>
+		    <li><pre style="display:inline;">sendKeys(keys)</pre></li>
+		  </ul>
+		  <aside class="notes">
+		    <p>Press and release keys require variables that represent keys on the keyboard that are text. This means things like the TAB key, or escape. sendKeys can do it all, it's essentially a combined press and release keys.</p>
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Mouse Interactions</h3>
+		  <p>The Mouse interactions class is used by the Actions class but is unstable when used its own.</p>
+		  <p>Some of the actions from the Mouse interface:</p>
+		  <ul>
+		    <li><pre style="display:inline;">click(Coordinates xy)</pre></li>
+		    <li><pre style="display:inline;">contextClick(Coordinates xy))</pre></li>
+		    <li><pre style="display:inline;">doubleClick(Coordinates xy))</pre></li>
+		    <li><pre style="display:inline;">mouseDown(Coordinates xy))</pre></li>
+		    <li><pre style="display:inline;">mouseMove(Coordinates xy, x offset, y offset))</pre></li>
+		    <li><pre style="display:inline;">mouseUp(Coordinates xy))</pre></li>
+		  </ul>
+		  <aside class="notes">
+		    <p>The coordinates class consists of x and y locators for the current location of the mouse on the page. </p>
+		  </aside>
 		</section>
 		
 		<section>
 		  <h3>Hover</h3>
+		  <pre>
+		    <code class="java" contenteditable data-trim>
+		      WebElement hoverElement = driver.findElement(By.id("hoverElement"));
+Actions builder = new Actions(driver);
+
+builder.moveToElement(hoverElement).build().perform();
+		    </code>
+		  </pre>
+		  <aside class="notes">
+		    <p>One of the more advanced application interactions we get questions about revolve around hovers. Which we can see are not as complicated to write as they may sound.</p>
+		    <p>A hover really just involves moving the mouse pointer to the element.</p>
+		    <p><a href="http://the-internet.herokuapp.com/hovers">http://the-internet.herokuapp.com/hovers</a></p>
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Drag and Drop</h3>
-		  <p>More?</p>
+		  <pre>
+		    <code class="java" contenteditable data-trim>
+		  Actions dragNDrop = new Actions(driver);
+dragNDrop.dragAndDrop(elementA, elementB).perform();
+		    </code>
+		    </pre>
+		  <aside class="notes">
+		    <p>The Actions class also includes a directive to intiate a drag and drop.</p>
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Focus</h3>
+		  <pre>
+		    <code class="java" contenteditable data-trim>
+		      new Actions(driver).moveToElement(element).perform();
+		    </code>
+		  </pre>
+		  <aside class="notes">
+		    <p>The best way to switch the focus between elements in a script is to use the moveToElement function.</p>
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Selenium JS Executor</h3>
-		</section>
+		  <p>Executes JavaScript in the context of the currently selected frame or window. The script fragment provided will be executed as the body of an anonymous function</p>
+		  <pre>
+		    <code class="java" contenteditable data-trim>
+		      ((JavascriptExecutor) driver).executeScript("alert('hello world');"
+		    </code>
+		  </pre>
 
+		  <aside class="notes">
+		    <p>Need to cast the driver as a JavascriptExecutor first.</p>
+		    <p>There is also the ability to run a script asynchronously</p>
+		    <p>Execute an asynchronous piece of JavaScript in the context of the currently selected frame or window. Unlike executing synchronous JavaScript, scripts executed with this method must explicitly signal they are finished by invoking the provided callback. This callback is always injected into the executed function as the last argument.</p>
+		  </aside>
+		</section>
+		
+		<section>
+		  <h3>Accessibility Testing</h3>
+		  <p>Testing your website's accessibility for people with disabilities</p>
+		  <ul>
+		    <li>Physical - Using tabs to go from element to element</li>
+		    <li>Hearing - Using alt text in images, putting page titles in headers</li>
+		    <li>Vision - Color contrast for text on the page</li>
+		  </ul>
+		  <p style="text-align:center;"><a href="http://sauceio.com/index.php/2015/12/accessibility-ax-testing-in-the-devops-chain/">Blog: Accessibility (AX) Testing in the DevOps Chain</a></p>
+		  <aside class="notes">
+		    <p>Accessibility testing can be pretty important for your application. Accessible websites/applications have a number of features that make it easier for people with disabilities to interact with the application.</p>
+		    <p></p>
+		  </aside>
+		</section>
+		
 		<section>
 		  <h3>Lab 2: Actions</h3>
 		  <ol>
