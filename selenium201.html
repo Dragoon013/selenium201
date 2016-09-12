@@ -510,20 +510,36 @@ WebElement messageElement = wait.until(
                   </div>
 
                   <aside class="notes">
-                    There are many situations in which your test script may run ahead of the website or application you're testing, resulting in timeouts and a failing test. For example, you may have a dynamic content element that, after a user clicks on it, a loading appears for five seconds. If your script isn't written in such a way as to account for that five second load time, it may fail because the next interactive element isn't available yet. The general recommended solution for this is to use explicit waits.
-                  </aside>
+                    <p>There are many situations in which your test script may run ahead of the website or application you're testing, resulting in timeouts and a failing test. For example, you may have a dynamic content element that, after a user clicks on it, a loading appears for five seconds. If your script isn't written in such a way as to account for that five second load time, it may fail because the next interactive element isn't available yet. The general recommended solution for this is to use explicit waits.</p>
+
+		    <p><mark>Why you may not want to use implicit waits w/ Fluent/explicit waits</mark>: Once you set implicit waiting, you cannot use explicit- or fluent wait until you reset the implicit waiting again. This means that ExpectedConditions, which contain driver.findElement calls will not work as expected with implicit wait! You'll often encounter cases where you want to check for an element or its non-existence instantly - but you can't do that either.</p>
+		  </aside>
               </section>
 
 	      <section>
 		<h3>Fluent Waits</h3>
+		<pre><code class="java" contenteditable data-trim>
+		    Wait fluentWait = new FluentWait(driver)
+                  .withTimeout(30, SECONDS)
+                  .pollingEvery(5, SECONDS)
+                  .ignoring(NoSuchElementException.class);
 
+WebElement foo = fluentWait.until(new Function() {
+    public WebElement apply(WebDriver driver) {
+        return driver.findElement(By.id("foo"));
+    }
+});
+		</code></pre>
+		<aside class="notes">
+		  <p>Fluent waits allow you to set a timeframe over which you want to test, and a polling interval as well. So you can set a timeout of 30 seconds (it will check over 30 sec.), have a polling of 5 seconds (will run the check every 5 seconds, within that 30 sec. timeout), and you can tell it to ignore common errors that may come up as well. </p>
+		  <p>Generally, Fluent Waits are used to detect changes in the properties of an element on a page. If you are waiting for the object to render or load, then an implicit or explicit wait will be a better solution.</p>
+		  <p>handy Link: <a href="http://www.techbeamers.com/webdriver-fluent-wait-command-examples/" target="_blank"></a></p>
+		</aside>
 	      </section>
 
 <!--Testing Frameworks and Page Abstraction Module-->
                 <section data-background="rgb(226, 35, 26)">
                   <h2>Testing Frameworks and Page Abstraction</h2>
-                  <aside class="notes">
-                  </aside>
                 </section>
 
                 <section>
@@ -597,12 +613,30 @@ WebElement messageElement = wait.until(
 
 		<section>
 		  <h3>TestNG</h3>
-		  
+		  <ul>
+		    <li>Inspired by JUnit and NUnit</li>
+		    <li>Aims to cover wider range of types of testing</li>
+		    <li>Easier to use</li>
+		  </ul>
+                  <aside class="notes">
+		    <p>The testing framework that we are using today is TestNG. One big benefit of using a testing framework are the annotations, the @x that you see scattered through testing scripts. These help faciliate the design and build of a testing suite, allowing you designate particular functions as set-up, teardown, or actual tests. This makes it very easy to organize your code and tests, which makes maintaining them much less of a hassle. It also automates a lot of the ordering and funcion calls that you would have to make explicitly without the annotations.</p>
+		  </aside>
 		</section>
 		
 		<section>
 		  <h3>Browser Profiles</h3>
-		  <p></p>
+		  <p>MOVE ME - I think selenium101</p>
+		  <ul>
+		    <li>FirefoxProfile - user profiles and browser settings</li>
+		    <li>ChromeOptions</li>
+		    <li>safari.options - clean session</li>
+		    <li>DesiredCapabilities - browser-specific capabilities</li>
+		  </ul>
+		  <aside class="notes">
+		    <p>First off, there is a distinction between "Browser Profiles" (user profiles) and "Browser Settings". It's important to make these distinctions, because not all browsers have the same concepts. For instance, Firefox has user profiles that can be used by Selenium, while IE does not have the concept of user profiles. But they both have the ability to set partciular browser settings, either through the profile, or through browser options, or the desired capabilities.</p>
+		    <p>Browser profiles allow you to apply browser level settings prior to tests, so you can configure the browser to precisely what you need. this can be a good way to test how your application interacts with particular extensions or plugins, for example.</p>
+		    <p>Locally, these all make sense, as they all come with the chrome, firefox, etc drivers. The remote webdriver requires the profiles or options to be incorporated as part of the desired capabiltiies. which is fairly easy to do.</p>
+		  </aside>
 		</section>
 
 		<section data-state:"lab">
@@ -629,7 +663,14 @@ WebElement messageElement = wait.until(
 
 		<section>
 		  <h3>Converting a Simple Script</h3>
-		  <p>a few slides on this process and a lab</p>
+		  <ul>
+		    <li>@Test</li>
+		    <li>@AfterTest</li>
+		    <li>@BeforeTest</li>
+		  </ul>
+		  <aside class="notes">
+		    <p></p>
+		  </aside>
 		</section>
 
 		<section data-state="lab">
