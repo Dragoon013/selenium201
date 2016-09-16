@@ -622,6 +622,18 @@ WebElement foo = fluentWait.until(new Function() {
 		    <p>The testing framework that we are using today is TestNG. One big benefit of using a testing framework are the annotations, the @x that you see scattered through testing scripts. These help faciliate the design and build of a testing suite, allowing you designate particular functions as set-up, teardown, or actual tests. This makes it very easy to organize your code and tests, which makes maintaining them much less of a hassle. It also automates a lot of the ordering and funcion calls that you would have to make explicitly without the annotations.</p>
 		  </aside>
 		</section>
+
+		<section>
+		  <h3>Annotations</h3>
+		  <ul>
+		    <li>@Test</li>
+		    <li>@AfterTest</li>
+		    <li>@BeforeTest</li>
+		  </ul>
+		  <aside class="notes">
+		    <p></p>
+		  </aside>
+		</section>
 		
 		<section>
 		  <h3>Browser Profiles</h3>
@@ -646,6 +658,7 @@ WebElement foo = fluentWait.until(new Function() {
 		    <li>go through how the pom.xml works, other dependencies (maven)</li>
 		  </ol>
 		</section>
+
 		
 		<section>
                   <h3>Object Oriented Testing</h3>
@@ -658,25 +671,84 @@ WebElement foo = fluentWait.until(new Function() {
                     <p>
                       Sometimes we interact with particular elements in our application repeatedly. The nature of applications is that they change over time as well. Instead of writing the same code for the same interacctions, we can add a level of abstraction with page objects.
                     </p>
-                  </aside>
+		    <p>Moving from the explicit to the abstract in order to make test maintentance easier</p>
+		  </aside>
 		</section>
-
+		
+		
 		<section>
 		  <h3>Converting a Simple Script</h3>
-		  <ul>
-		    <li>@Test</li>
-		    <li>@AfterTest</li>
-		    <li>@BeforeTest</li>
-		  </ul>
-		  <aside class="notes">
+		  <ol>
+		    <li>Open basic scripts</li>
+		    <li>Identify code that fits into at least 3 different sections</li>
+		    <ul>
+		      <li>Set-up</li>
+		      <li>Test</li>
+		      <li>Teardown</li>
+		    </ul>
+		    <li>Separate the different parts into functions with the appropriate annotations</li>
+		    <li>Anyalyze script for any repetive identifications or actions and store values/actions in variables</li>
+		  </ol>
+		  <aside class="java">
 		    <p></p>
 		  </aside>
 		</section>
 
-		<section data-state="lab">
+		<section>
+		<section>
+		  <h3>Example Script</h3>
+		  <p>Parts of a complete test framework abstracted script</p>
+		  <div style="text-align:center;"><img style="width:75%;" src="assets/images/pre-abstract.png"></img></div>
+		</section>
+
+		<section>
+		  <h3>Abstracted Script</h3>
+		  <p>Parts of a complete test framework abstracted script</p>
+		  <div style="text-align:center;"><img style="width:73%;" src="assets/images/after-abstract.png"></img></div>
+		</section>
+		
+		<section>
+		  <h3>Example 1</h3>
+		  <p>Before:</p>
+		    <pre><code class="java" data-trim contenteditable>
+			driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
+...
+driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
+		    </code></pre>
+		  <p>After:</p>
+		    <pre style="width:101%;"><code class="java" data-trim contenteditable>
+			WebElement button = driver.findElement(By.xpath("//div[2]/div/div/div/button"));
+button.click();
+...
+button.click();
+		    </code></pre>
+		    
+		</section>
+		
+		<section>
+		  <h3>Example 2</h3>
+		  <p>Before:</p>
+		  <pre><code class="java" data-trim contenteditable>
+		      WebElement hoverElement = driver.findElement(By.id("button"));
+Actions builder = new Actions(driver);
+
+builder.moveToElement(hoverElement).build().perform();
+		  </code></pre>
+		  
+		  <p>After:</p>
+		  <pre style="width:94%;"><code class="java" data-trim contenteditable>
+		      WebElement hoverElement = driver.findElement(By.id("btn1"));
+Action hoverBtn1 = new Actions(driver).moveToElement(hoverElement).build();
+			 
+hoverBtn1.perform();
+		  </code></pre>
+		</section>
+		   </section>
+		  
+		  <section data-state="lab">
 		  <h3>Lab 4: I'm More than Just an Object</h3>
 		  <ol>
-		    <li>Convert a simple script into one that ismore abstracted.</li>
+		    <li>Convert a simple script into one that is more abstracted.</li>
 		    <li>maybe start with original, and one that is partially complete - have them examine side by side and complete the partially finished abstracted script.</li>
 		  </ol>
 		</section>
@@ -696,17 +768,61 @@ WebElement foo = fluentWait.until(new Function() {
 
 		<section>
 		  <h3>Basic Authentication</h3>
-		  <p></p>
+		  <pre><code class="java" data-trim contenteditable>
+		      driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+		  </code></pre>
+		  <aside class="notes">
+		    <p>There are a couple of different ways of authenticating, but doing it through the URL is usually the best way of going about it.</p>
+		  </aside>
 		</section>
 
 		<section>
 		  <h3>Cookie Insertion</h3>
-		  <p></p>
+
+		  <pre><code class="java" contenteditable data-trim>
+		      Cookie cookie = new Cookie.Builder("name", "value")
+		      .domain(".mydomain.com")
+		      .expiresOn(new Date(2015, 10, 28))
+		      .isHttpOnly(true)
+		      .isSecure(false)
+		      .path("/mypath")
+		      .build();
+		      
+driver.manage().addCookie(ck);
+		  </code></pre>
+
+		  <pre><code class="java" contenteditable data-trim>
+		      Cookie cookie = new Cookie("name", "value");
+driver.manage().addCookie(cookie);
+		  </code></pre>
+		  
+		  <div style="text-align:center;"><small>Documentation: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/Cookie.html" target="_blank">Cookies</a></small></div>
+		   <div style="text-align:center;"><small>Documentation: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebDriver.Options.html" target="_blank">Webdriver Cookie Options</a></small></div>
 		</section>
-		
+
 		<section>
-		  <h3>File Uploads/Downloads</h3>
-		  <p></p>
+		  <section>
+		    <h3>File Uploads</h3>
+		    <pre><code class="java" data-trim contenteditable>
+			//set-up
+driver = new RemoteWebDriver(new URL(URL), caps);
+driver.setFileDetector(new LocalFileDetector());
+		      
+...
+		      
+//test
+WebElement fileInput = driver.findElement(By.id("file-upload"));
+fileInput.sendKeys("/Absolute/Path/to/Image.png");
+		    </code></pre>
+		  </section>
+
+		  <section>
+		    <h3>File Downloads</h3>
+		    <pre><code class="java" data-trim contenteditable>
+		
+		    </code></pre>
+		    
+		  </section>
 		</section>
 
 		<section>
@@ -717,20 +833,6 @@ WebElement foo = fluentWait.until(new Function() {
 		  <h3>Popups</h3>
 		</section>
 		
-                <section>
-                    <h3>Other Actions</h3>
-                    <li>Clear</li>
-                    <li>Hover</li>
-                    <li>SwitchTo</li>
-                    <li>and more!</li>
-                    <aside class="notes">
-                      <p>There are a plethora of additional actions we can use as well. We can ue Clear to delete the contents of a field, or textbox.</p>
-                      <p>We can write a script that emulate the hovering of the mouse over an element.</p>
-                      <p>SwitchTo is used to switch to a new windows or screens, and this include popups as well.</p>
-                      <p>Anything you can think of doing on a web browser normally, you can tell Selenium to simulate in a test</p>
-                    </aside>
-                  </section>
-
 		<section data-state="lab">
 		  <h3>Lab 5: Advanced Page Interactions</h3>
 		  <ol>
