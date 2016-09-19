@@ -818,19 +818,42 @@ fileInput.sendKeys("/Absolute/Path/to/Image.png");
 
 		  <section>
 		    <h3>File Downloads</h3>
-		    <pre><code class="java" data-trim contenteditable>
-		
-		    </code></pre>
-		    
+		    <p>File downloads are more complicated</p>
+		   <ul> <li>How do you deal with the dialogue box?</li>
+		    <li>How do you actually check the contents or interact with the file?</li>
+		    </ul>
+
+		    <aside class="notes">
+		      <p>The easiest way to deal with the dialogue box is to simply change the profile settings on the Browser. This is most easily done with Firefox, but when you do this, it is hard to determine where you actually downloaded the file to, and verify it's content.</p>
+		      <p>There are a couple of methods out there on the internet, that involve getting the results through a cookie, or some fancy finagliing.</p>
+		      <p>The real question is what you are trying to do. If you just need to be able to click on a link that downloads a file, then that is pretty easy. It's verifying the contents that get a bit trickier. It's normally not worth doing that using selenium, but rather manually.</p>
+		    </aside>
 		  </section>
 		</section>
 
 		<section>
 		  <h3>Alerts</h3>
+
+		  <pre><code class="java" data-trim contenteditable>
+		      WebDriverWait wait = new WebDriverWait(driver, 2);
+wait.until(ExpectedConditions.alertIsPresent());
+Alert alert = driver.switchTo().alert();
+alert.accept();
+		  </code></pre>
+		  <div style="text-align:center;"><small>Documentation: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/Alert.html" target="_blank">Alerts</a></small></div>		  
 		</section>
 
 		<section>
 		  <h3>Popups</h3>
+		  <pre><code class="java" data-trim contenteditable>
+		      String myWindowHandle = driver.getWindowHandle();
+
+driver.switchTo().window(myWindowHandle);
+		  </code></pre>
+
+		  <aside class="notes">
+		    <p>Hopefully you all know that alerts and pop-ups are not the same thing. Pop-ups are just other browser windows, and these can switched between easily with the switchTo() function.</p>
+		  </aside>
 		</section>
 		
 		<section data-state="lab">
@@ -843,8 +866,6 @@ fileInput.sendKeys("/Absolute/Path/to/Image.png");
 	      <!--Parallelization Module-->
                 <section data-background="rgb(226, 35, 26)">
                   <h2>Test Parallelization</h2>
-                  <aside class="notes">
-                  </aside>
                 </section>
 
                 <section>
@@ -859,6 +880,8 @@ fileInput.sendKeys("/Absolute/Path/to/Image.png");
 		<section>
 		  <h3>What is Parallelization?</h3>
 		  <p>How does it fit into CI/CD?</p>
+                  <aside class="notes">
+                  </aside>
 		</section>
 
 		<section>
