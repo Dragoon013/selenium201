@@ -625,11 +625,15 @@ WebElement foo = fluentWait.until(new Function() {
 
 		<section>
 		  <h3>Annotations</h3>
+		  <div style="width:101%;">
 		  <ul>
-		    <li>@Test</li>
-		    <li>@AfterTest</li>
-		    <li>@BeforeTest</li>
+		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@Test</span></pre> - Marks a class or a method as part of the test</li>
+		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@BeforeSuite</span></pre> - The annotated method will be run before all tests in this suite have run. </li>
+		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@AfterTest</span></pre> - The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run</li>
 		  </ul>
+		  </div>
+		  <br></br>
+		  <div style="text-align:center;"><small>Documentation: <a href="http://testng.org/doc/documentation-main.html" target="_blank">TestNG Annotations</a></small></div>
 		  <aside class="notes">
 		    <p></p>
 		  </aside>
@@ -879,21 +883,36 @@ driver.switchTo().window(myWindowHandle);
 
 		<section>
 		  <h3>What is Parallelization?</h3>
-		  <p>How does it fit into CI/CD?</p>
-                  <aside class="notes">
+		  <p>Parallelization means starting and running your tests all at the same time, across all supported browsers and OS.</p>
+		  
+		  <aside class="notes">
                   </aside>
 		</section>
 
 		<section>
 		  <section>
 		    <h3>Parallelization Requirements</h3>
+
+		    <ul>
+		      <li>Framework</li>
+		      <li>Small, Atomic, and Autonomous</li>
+		      <li>Hardware</li>
+		      <li>Network Resilience</li>
+		    </ul>
+		    
+		    <aside class="notes">
+		      <p>Framework helps to faciliate the different unit/feature tests, as well as the configuration of Browsers and OSs to test on.</p>
+		      <p>Small, etc discussed on next slide</p>
+		      <p>Hardware - either use Sauce Labs your own Selenium grid. Basically, you need to have the environments to test on</p>
+		      <p>Network resilience means that you need to make sure that your application can handle the 100+ tests you're planning on hitting it with all at once. Make sure you have a proxy that can handle all the incoming requests.</p>
+		    </aside>
 		  </section>
 		  
 		  <section>
-                    <h3>Small, Atomic, and Autonomous Testing</h3>
-                    <p>Small: Tests should be short and succinct</p>
-                    <p>Atomic: Tests should focus on testing a single feature.</p>
-                    <p>Autonomous: Tests should be independent of other tests.</p>
+		    <h3>Small, Atomic, and Autonomous Testing</h3>
+		      <p>Small: Tests should be short and succinct</p>
+                      <p>Atomic: Tests should focus on testing a single feature.</p>
+                      <p>Autonomous: Tests should be independent of other tests.</p> 
 		    
                     <aside class="notes">
 		      
@@ -903,15 +922,44 @@ driver.switchTo().window(myWindowHandle);
                     </aside>
                   </section>
 		</section>
+
+		<section>
+		<section>
+		  <h3>Using a Testing Framework for Paralellization</h3>
+		  
+
+		  <pre><code class="java" data-trim contenteditable>
+		      @DataProvider(name = "hardCodedBrowsers", parallel = true)
+public static Object[][] sauceBrowserDataProvider(Method testMethod) {
+    return new Object[][]{
+        new Object[]{"internet explorer", "11", "Windows 8.1"},
+        new Object[]{"chrome", "41", "Windows XP"},
+        new Object[]{"safari", "7", "OS X 10.9"},
+        new Object[]{"firefox", "35", "Windows 7"},
+    };
+}
+		  </code></pre>
+		  <div style="text-align:center;"><p><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@DataProvider</span></pre> is a TestNG annotation.</p></div>
+
+		  <aside class="notes">
+		    <p>The data provider allows us to identify the browser, browser version and OS that we want to run our tests on. The testing framework really helps us out here with parallelization, as this tells the script to run it's defined tests all once on each of these different environments.</p>
+		  </aside>
+		  </section>
 		
 		<section>
-		  <h3>Two ways to run in Parallel</h3>
-		  <li>Cross browser</li>
-		  <li>Functional Tests</li>
+		  <h3>@Test Parameters</h3>
+		 
+		 We need to make sure that our annotated tests refer back to the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@DataProvider</span></pre> 
+		 <pre style="text-align:center;"><code class="java" data-trim contenteditable>
+		     @Test(dataProvider = "hardCodedBrowsers")
+		 </code></pre>
 
-		  <p>Can combine these too!</p>
+		 <aside class="notes">
+		   <p></p>
+		 </aside>
 		</section>
-
+		</section>
+		
 		<section data-state="lab">
 		  <h3>Lab 6: Parallelization Lab</h3>
 		  <ol>
@@ -938,21 +986,65 @@ driver.switchTo().window(myWindowHandle);
 
 		<section>
 		  <section>
+		    <h3>The Continuous State</h3>
+ 		    <p>There are a lot of continuous ideas out there:</p>
+		    <ul>
+		      <li>Continuous Integration</li>
+		      <li>Continuous Delivery</li>
+		      <li>Continuous Deployment</li>
+		    </ul>
+		    <aside class="notes">
+		      <p>There are a lout different continuous things out there. IT's hard to know what they all mean, and which you may or may not need in your organization. WE're going to talk about a couple of these different continuous ideas. </p>
+		    </aside>
+		  </section>
+		  
+		  <section>
 		    <h3>Continuous Integration</h3>
+		    <p>diagram</p>
+		    <p>The practice of continually merging code into a central repository, upon which automated tests and builds are then run.</p>
+		    <aside class="notes">
+		      <p>Basically, it's the practice of merging code continuously, by giving developers tasks that are small and easy to accomplish, so then they can push more quickly and regularly becaus they will finish tasks more quickly. Then their smaller integrations get tested and built as they are pushed, allowing you to catch bugs and irregularities more quickly.</p>
+		      <p>It has to do with the size of the tasks you assign to a developer; If a task is estimated to take 4-5 man-days then the developer will have no incitement to deliver anything for the next 4-5 days, because he's not done with anything - yet.</p>
+		    </aside>
 		  </section>
 		  
 		  <section>
 		    <h3>Continuous Delivery</h3>
+		    <p>A software practice that focuses on producing software in short cycles, ensuring that the software can be reliably released at any time.</p>
+		    <aside class="notes">
+		      <p>Continuous delivery is the practice of developing software in short cycles, so that your releases are incremental changes, rather than very large ones, ensuring that each incremental change is deployable. The smaller releases are tested and built extensively, and each release is potentially deployable, according to a deployment process.</p>
+		    </aside>
 		  </section>
 
 		  <section>
-		    <h3>CI and CD Together</h3>
+		    <h3>Continuous Deployment</h3>
+		    <p>diagram</p>
+		    <p>A software practice that focuses on producing software in short cycles and deploying those changes automatically to production.</p>
+		    <aside class="notes">
+		      <p>Continuous deployment is pretty similar to continuous delivery. the real difference is that continuous delivery makes sure that all releases are deployable, but are contingent on approval to actually get deployed to production. Continuous deployment does not deal with approval, and assumes that all releases that are deployable will be deployed automatically.</p>
+
+		      <p>There isn't anything inherently better about Continuous deployment vs continuous delivery. It depends on your application and business goals.</p>
+		    </aside>
+		  </section>
+		  
+		  <section>
+		    <h3>Bringing CI and CD Together</h3>
+		    <p>diagram</p>
+		    <aside class="notes">
+		      <p>CD is like applying CI to the whole deployment of a product, rather than just the development aspect. </p>
+		    </aside>
 		  </section>
 		</section>
 
 		<section>
+		  <h3>Jenkins</h3>
+		  <p>logo image</p>
+		  <p>about</p>
+		</section>
+		
+		<section>
 		  <h3>Sauce Jenkins plugin</h3>
-
+		  <p>about</p>
 		  <aside class="notes">
 		    some other integrations:
 		    Setting Up Sauce for Visual Studio Team Services
