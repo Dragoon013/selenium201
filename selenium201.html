@@ -113,9 +113,9 @@
                 <ul>
                   <li>ReadyTech virtual machines</li>
                   <li>Eclipse</li>
+		  <li>Java</li>
                   <li>Maven</li>
 		  <li>Sauce Labs</li>
-		  <li>Jenkins</li>
                 </ul>
 		
                 <aside class="notes">
@@ -135,6 +135,24 @@
 		  
                 </aside>
               </section>
+
+	      <section>
+		<h3>Saucelabs.com Account</h3>
+		<p>If you haven't do so already, please take the time to create a saucelabs.com account.</p>
+		<p>If you had already made one in the past, and your free trial has run out, let me know!</p>
+	      </section>
+	      
+	      <section>
+		<h3>Accessing the ReadyTech Environment</h3>
+		<ul>
+		  <li>Check your email for a link to the environment and your access code.</li>
+		  <ul><li>Look in spam!</li></ul>
+		  <li>Enter your access code.</li>
+		  <li>You will arrive in the <span style="color:rgb(87,193,232); display:inline;">Lobby</span> tab.</li>
+		  <li>Access the environment by clicking on the <span style="color:rgb(87,193,232); display:inline;">Lab</span> tab.</li>
+		  <li>Click on the Remote Desktop image. This will take to you to the remote desktop.</li>
+		</ul>
+	      </section>
 	      
               <section>
                 <h3>Agenda</h3>
@@ -142,7 +160,7 @@
                 <div style="text-align:left;">
                     <!--<img src="assets/images/agenda.png" style="border:none; background:none; width:80%">-->
                 </div>
-				  <ul>
+		<ul>
 		    <li>Advanced Script Writing</li>
 		    <li>Waits</li>
 		    <li>Testing Frameworks and Page Abstraction</li>
@@ -311,8 +329,11 @@
 		<section data-state="lab">
 		  <h3>Lab 1: Locators</h3>
 		  <ol>
+		    <li>Sign into Saucelabs.com Account</li>
+		    <li>Fill out credentials in the script</li>
 		    <li>Write Locators bt ID, CSS and XPAth</li>
-		    <li>Maybe do a speedtest demo here. (ex: cat paws)</li>
+		    <li>Speedtest Demo here (cat's paws)</li>
+		    <li>ABSOLUTELY NO LOCAL TESTING</li>
 		  </ol>
 		</section>
 		
@@ -468,295 +489,16 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 		
 		<section>
 		  <h3>Lab 2: Actions</h3>
+		  <p>this lab will take a look at two different actions: hovers and the Selenium JS</p>
 		  <ol>
-		    <li>write a couple actions</li>
-		  </ol>
-		</section>
-				
-<!--Waits Module-->
-		<section data-background="rgb(226, 35, 26)">
-		  <h2>Advanced Waits</h2>
-		</section>
-
-		<section>
-                  <h3>Module Objectives</h3>
-                  <p>This module enables you to:</p>
-                  <ul>
-                    <li>Understand the different kinds of waits and when to use them</li>
-		  </ul>
-                  <aside class="notes"></aside>
-                </section>
-		
-              <section>
-                  <h3>Explicit and Implicit Waits</h3>
-
-                  <p>Implicit Waits</p>
-                  <pre>
-                    <code data-trim contenteditable class="java">
-                      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                    </code>
-                  </pre>
-
-                  <p>Explicit Waits</p>
-                  <div style="width:101%;">
-                    <pre><code class="java" data-trim contenteditable>
-                        import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-WebDriverWait wait = new WebDriverWait(driver, 10);
-WebElement messageElement = wait.until(
-                            ExpectedConditions.presenceOfElementLocated(
-                            By.id("loginResponse")));
-                    </code></pre>
-                  </div>
-
-                  <aside class="notes">
-                    <p>There are many situations in which your test script may run ahead of the website or application you're testing, resulting in timeouts and a failing test. For example, you may have a dynamic content element that, after a user clicks on it, a loading appears for five seconds. If your script isn't written in such a way as to account for that five second load time, it may fail because the next interactive element isn't available yet. The general recommended solution for this is to use explicit waits.</p>
-
-		    <p><mark>Why you may not want to use implicit waits w/ Fluent/explicit waits</mark>: Once you set implicit waiting, you cannot use explicit- or fluent wait until you reset the implicit waiting again. This means that ExpectedConditions, which contain driver.findElement calls will not work as expected with implicit wait! You'll often encounter cases where you want to check for an element or its non-existence instantly - but you can't do that either.</p>
-		  </aside>
-              </section>
-
-	      <section>
-		<h3>Fluent Waits</h3>
-		<pre><code class="java" contenteditable data-trim>
-		    Wait fluentWait = new FluentWait(driver)
-                  .withTimeout(30, SECONDS)
-                  .pollingEvery(5, SECONDS)
-                  .ignoring(NoSuchElementException.class);
-
-WebElement foo = fluentWait.until(new Function() {
-    public WebElement apply(WebDriver driver) {
-        return driver.findElement(By.id("foo"));
-    }
-});
-		</code></pre>
-		<aside class="notes">
-		  <p>Fluent waits allow you to set a timeframe over which you want to test, and a polling interval as well. So you can set a timeout of 30 seconds (it will check over 30 sec.), have a polling of 5 seconds (will run the check every 5 seconds, within that 30 sec. timeout), and you can tell it to ignore common errors that may come up as well. </p>
-		  <p>Generally, Fluent Waits are used to detect changes in the properties of an element on a page. If you are waiting for the object to render or load, then an implicit or explicit wait will be a better solution.</p>
-		  <p>handy Link: <a href="http://www.techbeamers.com/webdriver-fluent-wait-command-examples/" target="_blank"></a></p>
-		</aside>
-	      </section>
-
-<!--Testing Frameworks and Page Abstraction Module-->
-                <section data-background="rgb(226, 35, 26)">
-                  <h2>Testing Frameworks and Page Abstraction</h2>
-                </section>
-
-                <section>
-                  <h3>Module Objectives</h3>
-                  <p>This module enables you to:</p>
-                  <ul>
-		    <li>Understand and use testing frameworks when writing test scripts</li>
-                    <li>Understand and work with the concept of page objectification</li>
-                  </ul>
-                  <aside class="notes"></aside>
-                </section>
-		
-	        <section>
-		  <h3>What is a Testing Framework?</h3>
-                  <p></p>
-                  <p>A test automation framework is a scaffold comprised of libraries, dependecies, drivers, and helper scripts that facilitate the execution of Selenium test scripts.</p>
-                  <aside class="notes">
-                    <p>Ok, what does that mean? It's essentially just a bunch of additional libraries we can use in conjunction with our script for several cases:</p>
-                    <li>Record your data: Frameworks often have, or can have a way for you to output the results of your test scripts for you, rather than writing them by hand</li>
-                    <li>Talk to external applications: you can include external libraries in your framework to talk to and send results to places like Sauce Labs</li>
-
-                  </aside>
-                </section>
-
-                <section>
-                  <h3>Popular Frameworks</h3>
-
-                  <div style="float:left;width:50%;" class="centered">
-                    <p><strong>Java:</strong></p>
-                    <li>TestNG</li>
-                    <li>JUnit</li>
-
-                    <p><strong>Ruby:</strong></p>
-                    <li>RSpec</li>
-                    <li>Cucumber</li>
-                  </div>
-
-                  <div style="float:right;width:50%;padding-right:0px;">
-                    <p><strong>Python:</strong></p>
-                    <li>Robot</li>
-                    <li>UnitTest</li>
-
-                    <p><strong>JavaScript:</strong></p>
-                    <li>Protractor</li>
-                    <li>Nightwatch</li>
-
-                  </div>
-                  <aside class="notes">
-
-                    <p>JavaScript:</p>
-                    <li>Mocha</li>
-                    <li>Karma</li>
-                    <li>Jasmine</li>
-
-                    <p>PHP:</p>
-                    <li>PHPUnit</li>
-                    <li>Sausage</li>
-                    <li>Codeception</li>
-
-                    <p>C#:</p>
-                    <li>NUnit</li>
-                    <li>MSTest</li>
-
-                    <p>Perl:</p>
-                    <li>TestMore</li>
-
-                    <p>There are quite a few different frameworks out there. Sauce Labs has a github page with examples of scripts written using all of these frameworks.</p>
-
-                  </aside>
-                </section>
-
-		<section>
-		  <h3>TestNG</h3>
-		  <ul>
-		    <li>Inspired by JUnit and NUnit</li>
-		    <li>Aims to cover wider range of types of testing</li>
-		    <li>Easier to use</li>
-		  </ul>
-                  <aside class="notes">
-		    <p>The testing framework that we are using today is TestNG. One big benefit of using a testing framework are the annotations, the @x that you see scattered through testing scripts. These help faciliate the design and build of a testing suite, allowing you designate particular functions as set-up, teardown, or actual tests. This makes it very easy to organize your code and tests, which makes maintaining them much less of a hassle. It also automates a lot of the ordering and funcion calls that you would have to make explicitly without the annotations.</p>
-		  </aside>
-		</section>
-
-		<section>
-		  <h3>Annotations</h3>
-		  <div style="width:101%;">
-		  <ul>
-		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@Test</span></pre> - Marks a class or a method as part of the test</li>
-		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@BeforeSuite</span></pre> - The annotated method will be run before all tests in this suite have run. </li>
-		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@AfterTest</span></pre> - The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run</li>
-		  </ul>
-		  </div>
-		  <br></br>
-		  <div style="text-align:center;"><small>Documentation: <a href="http://testng.org/doc/documentation-main.html" target="_blank">TestNG Annotations</a></small></div>
-		  <aside class="notes">
-		    <p></p>
-		  </aside>
-		</section>
-		
-		<section>
-		  <h3>Browser Profiles</h3>
-		  <p>MOVE ME - I think selenium101</p>
-		  <ul>
-		    <li>FirefoxProfile - user profiles and browser settings</li>
-		    <li>ChromeOptions</li>
-		    <li>safari.options - clean session</li>
-		    <li>DesiredCapabilities - browser-specific capabilities</li>
-		  </ul>
-		  <aside class="notes">
-		    <p>First off, there is a distinction between "Browser Profiles" (user profiles) and "Browser Settings". It's important to make these distinctions, because not all browsers have the same concepts. For instance, Firefox has user profiles that can be used by Selenium, while IE does not have the concept of user profiles. But they both have the ability to set partciular browser settings, either through the profile, or through browser options, or the desired capabilities.</p>
-		    <p>Browser profiles allow you to apply browser level settings prior to tests, so you can configure the browser to precisely what you need. this can be a good way to test how your application interacts with particular extensions or plugins, for example.</p>
-		    <p>Locally, these all make sense, as they all come with the chrome, firefox, etc drivers. The remote webdriver requires the profiles or options to be incorporated as part of the desired capabiltiies. which is fairly easy to do.</p>
-		  </aside>
-		</section>
-
-		<section data-state:"lab">
-		  <h3>Lab 3: More Actions/Framework</h3>
-		  <ol>
-		    <li>intro new script with all actions included, but with more frameworkiness</li>
-		    <li>go through how the pom.xml works, other dependencies (maven)</li>
-		  </ol>
-		</section>
-
-		
-		<section>
-                  <h3>Object Oriented Testing</h3>
-                  <p>Page Objects</p>
-                  <ul>
-                    <li>Code reuse across tests; reuse common element interactions</li>
-                    <li>Abstraction: With product change, only change one piece of code</li>
-                  </ul>
-                  <aside class="notes">
-                    <p>
-                      Sometimes we interact with particular elements in our application repeatedly. The nature of applications is that they change over time as well. Instead of writing the same code for the same interacctions, we can add a level of abstraction with page objects.
-                    </p>
-		    <p>Moving from the explicit to the abstract in order to make test maintentance easier</p>
-		  </aside>
-		</section>
-		
-		
-		<section>
-		  <h3>Converting a Simple Script</h3>
-		  <ol>
-		    <li>Open basic scripts</li>
-		    <li>Identify code that fits into at least 3 different sections</li>
-		    <ul>
-		      <li>Set-up</li>
-		      <li>Test</li>
-		      <li>Teardown</li>
-		    </ul>
-		    <li>Separate the different parts into functions with the appropriate annotations</li>
-		    <li>Anyalyze script for any repetive identifications or actions and store values/actions in variables</li>
-		  </ol>
-		  <aside class="java">
-		    <p></p>
-		  </aside>
-		</section>
-
-		<section>
-		<section>
-		  <h3>Example Script</h3>
-		  <p>Parts of a complete test framework abstracted script</p>
-		  <div style="text-align:center;"><img style="width:75%;" src="assets/images/pre-abstract.png"></img></div>
-		</section>
-
-		<section>
-		  <h3>Abstracted Script</h3>
-		  <p>Parts of a complete test framework abstracted script</p>
-		  <div style="text-align:center;"><img style="width:73%;" src="assets/images/after-abstract.png"></img></div>
-		</section>
-		
-		<section>
-		  <h3>Example 1</h3>
-		  <p>Before:</p>
-		    <pre><code class="java" data-trim contenteditable>
-			driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
-...
-driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
-		    </code></pre>
-		  <p>After:</p>
-		    <pre style="width:101%;"><code class="java" data-trim contenteditable>
-			WebElement button = driver.findElement(By.xpath("//div[2]/div/div/div/button"));
-button.click();
-...
-button.click();
-		    </code></pre>
 		    
-		</section>
-		
-		<section>
-		  <h3>Example 2</h3>
-		  <p>Before:</p>
-		  <pre><code class="java" data-trim contenteditable>
-		      WebElement hoverElement = driver.findElement(By.id("button"));
-Actions builder = new Actions(driver);
-
-builder.moveToElement(hoverElement).build().perform();
-		  </code></pre>
-		  
-		  <p>After:</p>
-		  <pre style="width:94%;"><code class="java" data-trim contenteditable>
-		      WebElement hoverElement = driver.findElement(By.id("btn1"));
-Action hoverBtn1 = new Actions(driver).moveToElement(hoverElement).build();
-			 
-hoverBtn1.perform();
-		  </code></pre>
-		</section>
-		   </section>
-		  
-		  <section data-state="lab">
-		  <h3>Lab 4: I'm More than Just an Object</h3>
-		  <ol>
-		    <li>Convert a simple script into one that is more abstracted.</li>
-		    <li>maybe start with original, and one that is partially complete - have them examine side by side and complete the partially finished abstracted script.</li>
+		    <li>build on top of the lcoators we already wrote about</li>
+		    <li>Chain actions together to hover over an element, review the test on sauce labs.</li>
+		    <li>execute some JS using the Selenium JS Executor</li>
 		  </ol>
 		</section>
 
+		
 	      <!--Adv. Application Interactions Module-->
                 <section data-background="rgb(226, 35, 26)">
 		  <h2>Advanced Application Interaction</h2>
@@ -864,6 +606,274 @@ driver.switchTo().window(myWindowHandle);
 		  <h3>Lab 5: Advanced Page Interactions</h3>
 		  <ol>
 		    <li>cookie insertion for oauth</li>
+		  </ol>
+		</section>
+		
+<!--Waits Module-->
+		<section data-background="rgb(226, 35, 26)">
+		  <h2>Advanced Waits</h2>
+		</section>
+
+		<section>
+                  <h3>Module Objectives</h3>
+                  <p>This module enables you to:</p>
+                  <ul>
+                    <li>Understand the different kinds of waits and when to use them</li>
+		  </ul>
+                  <aside class="notes"></aside>
+                </section>
+		
+              <section>
+                  <h3>Explicit and Implicit Waits</h3>
+
+                  <p>Implicit Waits</p>
+                  <pre>
+                    <code data-trim contenteditable class="java">
+                      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                    </code>
+                  </pre>
+
+                  <p>Explicit Waits</p>
+                  <div style="width:101%;">
+                    <pre><code class="java" data-trim contenteditable>
+                        import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+WebDriverWait wait = new WebDriverWait(driver, 10);
+WebElement messageElement = wait.until(
+                            ExpectedConditions.presenceOfElementLocated(
+                            By.id("loginResponse")));
+                    </code></pre>
+                  </div>
+
+                  <aside class="notes">
+                    <p>There are many situations in which your test script may run ahead of the website or application you're testing, resulting in timeouts and a failing test. For example, you may have a dynamic content element that, after a user clicks on it, a loading appears for five seconds. If your script isn't written in such a way as to account for that five second load time, it may fail because the next interactive element isn't available yet. The general recommended solution for this is to use explicit waits.</p>
+
+		    <p><mark>Why you may not want to use implicit waits w/ Fluent/explicit waits</mark>: Once you set implicit waiting, you cannot use explicit- or fluent wait until you reset the implicit waiting again. This means that ExpectedConditions, which contain driver.findElement calls will not work as expected with implicit wait! You'll often encounter cases where you want to check for an element or its non-existence instantly - but you can't do that either.</p>
+		  </aside>
+              </section>
+
+	      <section>
+		<h3>Fluent Waits</h3>
+		<pre><code class="java" contenteditable data-trim>
+		    Wait fluentWait = new FluentWait(driver)
+                  .withTimeout(30, SECONDS)
+                  .pollingEvery(5, SECONDS)
+                  .ignoring(NoSuchElementException.class);
+
+WebElement foo = fluentWait.until(new Function() {
+    public WebElement apply(WebDriver driver) {
+        return driver.findElement(By.id("foo"));
+    }
+});
+		</code></pre>
+		<aside class="notes">
+		  <p>Fluent waits allow you to set a timeframe over which you want to test, and a polling interval as well. So you can set a timeout of 30 seconds (it will check over 30 sec.), have a polling of 5 seconds (will run the check every 5 seconds, within that 30 sec. timeout), and you can tell it to ignore common errors that may come up as well. </p>
+		  <p>Generally, Fluent Waits are used to detect changes in the properties of an element on a page. If you are waiting for the object to render or load, then an implicit or explicit wait will be a better solution.</p>
+		  <p>handy Link: <a href="http://www.techbeamers.com/webdriver-fluent-wait-command-examples/" target="_blank"></a></p>
+		</aside>
+	      </section>
+
+	      <section>
+		<h3>Lab 3: Waits</h3>
+		<p>It would be nice to have a good example of fluent waits vs. explicit waits here.</p>
+		<ol>
+		  <li></li>
+		</ol>
+	      </section>
+
+<!--Testing Frameworks and Page Abstraction Module-->
+                <section data-background="rgb(226, 35, 26)">
+                  <h2>Testing Frameworks and Page Abstraction</h2>
+                </section>
+
+                <section>
+                  <h3>Module Objectives</h3>
+                  <p>This module enables you to:</p>
+                  <ul>
+		    <li>Understand and use testing frameworks when writing test scripts</li>
+                    <li>Understand and work with the concept of page objectification</li>
+                  </ul>
+                  <aside class="notes"></aside>
+                </section>
+		
+	        <section>
+		  <h3>What is a Testing Framework?</h3>
+                  <p></p>
+                  <p>A test automation framework is a scaffold comprised of libraries, dependecies, drivers, and helper scripts that facilitate the execution of Selenium test scripts.</p>
+                  <aside class="notes">
+                    <p>Ok, what does that mean? It's essentially just a bunch of additional libraries we can use in conjunction with our script for several cases:</p>
+                    <li>Record your data: Frameworks often have, or can have a way for you to output the results of your test scripts for you, rather than writing them by hand</li>
+                    <li>Talk to external applications: you can include external libraries in your framework to talk to and send results to places like Sauce Labs</li>
+
+                  </aside>
+                </section>
+
+                <section>
+                  <h3>Popular Frameworks</h3>
+
+                  <div style="float:left;width:50%;" class="centered">
+                    <p><strong>Java:</strong></p>
+                    <li>TestNG</li>
+                    <li>JUnit</li>
+
+                    <p><strong>Ruby:</strong></p>
+                    <li>RSpec</li>
+                    <li>Cucumber</li>
+                  </div>
+
+                  <div style="float:right;width:50%;padding-right:0px;">
+                    <p><strong>Python:</strong></p>
+                    <li>Robot</li>
+                    <li>UnitTest</li>
+
+                    <p><strong>JavaScript:</strong></p>
+                    <li>Protractor</li>
+                    <li>Nightwatch</li>
+
+                  </div>
+                  <aside class="notes">
+
+                    <p>JavaScript:</p>
+                    <li>Mocha</li>
+                    <li>Karma</li>
+                    <li>Jasmine</li>
+
+                    <p>PHP:</p>
+                    <li>PHPUnit</li>
+                    <li>Sausage</li>
+                    <li>Codeception</li>
+
+                    <p>C#:</p>
+                    <li>NUnit</li>
+                    <li>MSTest</li>
+
+                    <p>Perl:</p>
+                    <li>TestMore</li>
+
+                    <p>There are quite a few different frameworks out there. Sauce Labs has a github page with examples of scripts written using all of these frameworks.</p>
+
+                  </aside>
+                </section>
+
+		<section>
+		  <h3>TestNG</h3>
+		  <ul>
+		    <li>Inspired by JUnit and NUnit</li>
+		    <li>Aims to cover wider range of types of testing</li>
+		    <li>Easier to use</li>
+		  </ul>
+                  <aside class="notes">
+		    <p>The testing framework that we are using today is TestNG. One big benefit of using a testing framework are the annotations, the @x that you see scattered through testing scripts. These help faciliate the design and build of a testing suite, allowing you designate particular functions as set-up, teardown, or actual tests. This makes it very easy to organize your code and tests, which makes maintaining them much less of a hassle. It also automates a lot of the ordering and funcion calls that you would have to make explicitly without the annotations.</p>
+		  </aside>
+		</section>
+
+		<section>
+		  <h3>Annotations</h3>
+		  <div style="width:101%;">
+		  <ul>
+		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@Test</span></pre> - Marks a class or a method as part of the test</li>
+		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@BeforeSuite</span></pre> - The annotated method will be run before all tests in this suite have run. </li>
+		    <li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@AfterTest</span></pre> - The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run</li>
+		  </ul>
+		  </div>
+		  <br></br>
+		  <div style="text-align:center;"><small>Documentation: <a href="http://testng.org/doc/documentation-main.html" target="_blank">TestNG Annotations</a></small></div>
+		  <aside class="notes">
+		    <p></p>
+		  </aside>
+		</section>
+				
+		<section>
+                  <h3>Object Oriented Testing</h3>
+                  <p>Page Objects</p>
+                  <ul>
+                    <li>Code reuse across tests; reuse common element interactions</li>
+                    <li>Abstraction: With product change, only change one piece of code</li>
+                  </ul>
+                  <aside class="notes">
+                    <p>
+                      Sometimes we interact with particular elements in our application repeatedly. The nature of applications is that they change over time as well. Instead of writing the same code for the same interacctions, we can add a level of abstraction with page objects.
+                    </p>
+		    <p>Moving from the explicit to the abstract in order to make test maintentance easier</p>
+		  </aside>
+		</section>
+		
+		<section>
+		  <h3>Converting a Simple Script</h3>
+		  <ol>
+		    <li>Open basic scripts</li>
+		    <li>Identify code that fits into at least 3 different sections</li>
+		    <ul>
+		      <li>Set-up</li>
+		      <li>Test(s)</li>
+		      <li>Teardown</li>
+		    </ul>
+		    <li>Separate the different parts into functions with the appropriate annotations</li>
+		    <li>Analyze script for any repetitive identifications or actions and store values/actions in variables</li>
+		  </ol>
+		  <aside class="java">
+		    <p></p>
+		  </aside>
+		</section>
+
+		<section>
+		  <section>
+		    <h3>Example Script</h3>
+		    <p>Parts of a complete test framework abstracted script</p>
+		    <div style="text-align:center;"><img style="width:75%;" src="assets/images/pre-abstract.png"></img></div>
+		  </section>
+		  
+		  <section>
+		    <h3>Abstracted Script</h3>
+		    <p>Parts of a complete test framework abstracted script</p>
+		    <div style="text-align:center;"><img style="width:73%;" src="assets/images/after-abstract.png"></img></div>
+		  </section>
+		  
+		  <section>
+		    <h3>Example 1</h3>
+		    <p>Before:</p>
+		    <pre><code class="java" data-trim contenteditable>
+			driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
+...
+driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
+		    </code></pre>
+		    <p>After:</p>
+		    <pre style="width:101%;"><code class="java" data-trim contenteditable>
+			WebElement button = driver.findElement(By.xpath("//div[2]/div/div/div/button"));
+button.click();
+...
+button.click();
+		    </code></pre>
+		    
+		  </section>
+		
+		  <section>
+		    <h3>Example 2</h3>
+		    <p>Before:</p>
+		    <pre><code class="java" data-trim contenteditable>
+		      WebElement hoverElement = driver.findElement(By.id("button"));
+Actions builder = new Actions(driver);
+
+builder.moveToElement(hoverElement).build().perform();
+		    </code></pre>
+		  
+		    <p>After:</p>
+		  <pre style="width:94%;"><code class="java" data-trim contenteditable>
+		      WebElement hoverElement = driver.findElement(By.id("btn1"));
+Action hoverBtn1 = new Actions(driver).moveToElement(hoverElement).build();
+			 
+hoverBtn1.perform();
+		  </code></pre>
+		</section>
+		   </section>
+		  
+		  <section data-state="lab">
+		  <h3>Lab 4: I'm More than Just an Object</h3>
+		  <ol>
+		    <li>Convert a simple script into one that is more abstracted.</li>
+		    <li>Give them a new script to work on, that has some parts built for them already. some familiar looking code perhaps, but hopefully some new stuff too, different actions to give them more take-home value.</li>
+		    <li>Have them follow the conversion steps</li>
+		    <li>Run test</li>
 		  </ol>
 		</section>
 		
