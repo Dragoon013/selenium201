@@ -163,11 +163,9 @@
 		<ul>
 		    <li>Advanced Script Writing</li>
 		    <li>Waits</li>
-		    <li>Testing Frameworks and Page Abstraction</li>
 		    <li>Advanced Application Interactions</li>
+		    <li>Testing Frameworks and Page Abstraction</li>
 		    <li>Parallelization</li>
-		    <li>Continuous Integration</li>
-		    <li>Selenium and CI Troubleshooting</li>
 		  </ul>
 		<aside class="notes">
 		  <ul>
@@ -228,18 +226,39 @@
 
 		<section>
 		    <h3>Selenium Architecture</h3>
+		    <!-- Left Column -->
+		     <div style="float:left;width:45%;" class="centered">
 		    
 		    <div class="fragment" data-fragment-index="3" style="vertical-align:left; margin-left: auto; margin-right: auto;">
-		      <img src="assets/images/webdriver.png" style="border:0; background:none; width:23%">
+		      <img src="assets/images/webdriver.png" style="border:0; background:none; width:46%">
 		    </div>
 		    <div class="fragment" data-fragment-index="2" style="vertical-align:left; margin-left: auto; margin-right: auto;">
-		      <img src="assets/images/atoms.png" style="border:0; background:none; width:19%">
+		      <img src="assets/images/atoms.png" style="border:0; background:none; width:38%">
 		    </div>
 		    <div class="fragment" data-fragment-index="1" style="vertical-align:left; margin-left: auto; margin-right: auto;">
-		      <img src="assets/images/closure.png" style="border:0; background:none; width:20%">
+		      <img src="assets/images/closure.png" style="border:0; background:none; width:40%">
 		  </div>
+		</div>
+		<!--Right Column-->
+		<div style="float:right;width:55%;padding-right:0px;">
+		  <div class="fragment" data-fragment-index="3" style="vertical-align:right; margin-right: auto; margin-right: auto;"> <p><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Selenium WebDriver:</span></pre>Fires events at OS level</p>
+		  </div>
+		  
+		   <div class="fragment" data-fragment-index="2" style="vertical-align:right; margin-right: auto; margin-right: auto;"> <p><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Atom Utility Library:</span></pre>Smallest units of actual browser automation</p>
+		  </div>
+		  
+		   <div class="fragment" data-fragment-index="1" style="vertical-align:right; margin-right: auto; margin-right: auto;"> <p><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Google Closure Library:</span></pre>Compilation layer used for modularization</p>
+		  </div>
+		</div>
+
 		    <aside class="notes">
-		      <p></p>
+		      <ul>
+		      	<li>Google’s Closure Library: Closure compiler used for modularization and atomization. It targets Javascript as the output language. The compilation can be simple to complex i.e. concatenation input files and printing them out, or dead code removal.</li>
+
+<li>Atoms: Utility library used for atomizing the browser tasks i.e. getting value of an attribute, determining web element visibility, etc. Basically the smallest units of browser automation.</li>
+
+<li>WebDriver: Adapter layers comprised of these atoms that meet API contracts. WebDriver fires events at OS level to emulate user so browser believes these to be native events, thus circumventing the security restrictions. Also because they are OS specific, getting one event to successfully work generally means testing them in other browsers is relatively easy.</li>
+</ul>
 		    </aside>
 		</section>
 		
@@ -331,7 +350,7 @@
 		  <ol>
 		    <li>Sign into Saucelabs.com Account</li>
 		    <li>Fill out credentials in the script</li>
-		    <li>Write Locators bt ID, CSS and XPAth</li>
+		    <li>Write Locators: ID, CSS, and XPAth</li>
 		    <li>Speedtest Demo here (cat's paws)</li>
 		    <li>ABSOLUTELY NO LOCAL TESTING</li>
 		  </ol>
@@ -458,10 +477,10 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 
 		<section>
 		  <h3>Selenium JS Executor</h3>
-		  <p>Executes JavaScript in the context of the currently selected frame or window. The script fragment provided will be executed as the body of an anonymous function</p>
+		  <p>Executes JavaScript in the context of the currently selected frame or window. The script fragment provided will be executed as the body of an anonymous function.</p>
 		  <pre>
 		    <code class="java" contenteditable data-trim>
-		      ((JavascriptExecutor) driver).executeScript("alert('hello world');"
+		      ((JavascriptExecutor) driver).executeScript("alert('hello world');");
 		    </code>
 		  </pre>
 
@@ -487,12 +506,12 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 		  </aside>
 		</section>
 		
-		<section>
+		<section data-state="lab">
 		  <h3>Lab 2: Actions</h3>
-		  <p>this lab will take a look at two different actions: hovers and the Selenium JS</p>
+		  <p>This lab will take a look at two different actions: hovers and the Selenium JS</p>
 		  <ol>
 		    
-		    <li>build on top of the lcoators we already wrote about</li>
+		    <li>build on top of the locators we already wrote about</li>
 		    <li>Chain actions together to hover over an element, review the test on sauce labs.</li>
 		    <li>execute some JS using the Selenium JS Executor</li>
 		  </ol>
@@ -603,7 +622,7 @@ driver.switchTo().window(myWindowHandle);
 		</section>
 		
 		<section data-state="lab">
-		  <h3>Lab 5: Advanced Page Interactions</h3>
+		  <h3>Lab 3: Advanced Page Interactions</h3>
 		  <ol>
 		    <li>cookie insertion for oauth</li>
 		  </ol>
@@ -673,8 +692,8 @@ WebElement foo = fluentWait.until(new Function() {
 		</aside>
 	      </section>
 
-	      <section>
-		<h3>Lab 3: Waits</h3>
+	      <section data-state="lab">
+		<h3>Lab 4: Fluent Waits</h3>
 		<p>It would be nice to have a good example of fluent waits vs. explicit waits here.</p>
 		<ol>
 		  <li></li>
@@ -868,7 +887,7 @@ hoverBtn1.perform();
 		   </section>
 		  
 		  <section data-state="lab">
-		  <h3>Lab 4: I'm More than Just an Object</h3>
+		  <h3>Lab 5: I'm More than Just an Object</h3>
 		  <ol>
 		    <li>Convert a simple script into one that is more abstracted.</li>
 		    <li>Give them a new script to work on, that has some parts built for them already. some familiar looking code perhaps, but hopefully some new stuff too, different actions to give them more take-home value.</li>
@@ -919,10 +938,14 @@ hoverBtn1.perform();
 		  </section>
 		  
 		  <section>
-		    <h3>Small, Atomic, and Autonomous Testing</h3>
-		      <p>Small: Tests should be short and succinct</p>
-                      <p>Atomic: Tests should focus on testing a single feature.</p>
-                      <p>Autonomous: Tests should be independent of other tests.</p> 
+                     <h3>Small, Atomic, and Autonomous Testing</h3>
+
+                      <div style="float:left;width:10%;padding-right:5px;padding-bottom:10px;"><img src="assets/images/icons.png" style="border:0; text-align:center; background:none;">
+                  </div>
+                     <div style="padding-top:10px;"><p><strong>Small:</strong> Tests should be short and succinct.</p>
+                     <p><strong>Atomic:</strong> Tests should focus on testing a single feature.</p>
+                     <p><strong>Autonomous:</strong> Tests should be independent of other tests.</p>
+                   </div>
 		    
                     <aside class="notes">
 		      
@@ -935,7 +958,7 @@ hoverBtn1.perform();
 
 		<section>
 		<section>
-		  <h3>Using a Testing Framework for Paralellization</h3>
+		  <h3>Using a Testing Framework for Parallelization</h3>
 		  
 
 		  <pre><code class="java" data-trim contenteditable>
