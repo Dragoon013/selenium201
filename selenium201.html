@@ -911,6 +911,7 @@ public class MyPageObject{
 	
 }
 	</pre></code></p>
+	<div style="text-align:center;"><small>Documentation: <a href="https://raw.githubusercontent.com/wiki/SeleniumHQ/selenium/PageObjects.md" target="_blank">Page Object Model</a></small></div>
 	<aside class="notes">
 		<p>So as you can see here we have our operational commands of selenium separated out into separate methods that have logical names.</p>
 	</aside>
@@ -997,11 +998,37 @@ public class MyPageObject extends PageBase{
 	</pre></code>
 	<div style="text-align:center;"><small>Documentation: <a href="https://github.com/SeleniumHQ/selenium/wiki/PageFactory" target="_blank">Page Factory</a></small></div>
 	<aside class="notes">
-		So what the heck is a page factory? Page Factory is an inbuilt page object model concept for Selenium WebDriver but it is very optimized.
+		So what the heck is a page factory? PageFactory is a support class for the Selenium 2 Page Objects patternPage Factory
 
 Page Factory follows the concept of separation of Page Object repository and Test methods. With the help of the PageFactory class we can use annotations @FindBy to find WebElement rather than use driver.findElementby. Once the elements are located, we use the initElements method to initialize them in our scripts, after the page object is instantiated of course.
 
 @FindBy annotation can accept attributes like tagName, partialLinkText, name, linkText, id, css, className, and xpath.
+	</aside>
+</section>
+<section>
+	<h3>Page Factory Explanation</h3>
+	<ul>
+	<li>Page Factory uses sensible defaults</li>
+	<li>Page Factory uses same Driver that's passed through the constructor</li>
+	<li>Page Factory can also intialize the elements via an already constructed object</p>
+</ul>
+	<pre><code class="java" contenteditable data-trim>
+public class SearchMethod {
+	private WebElement s;
+
+	public void searchFor (String text) {
+	//page is instantiated here
+	s.sendKeys(text);
+	s.submit();
+	}
+}
+	</pre></code>
+	<aside class="notes">
+		<p>The name of the field in the Java class is assumed to be the "id" or "name" of the element on the HTML page. That is, in the example above, the line s.sendKeys(text) is equivalent to: driver.findElement(By.id("s")).sendKeys(text);</p>
+		<p>In the example given, we rely on the PageFactory to instantiate the instance of the PageObject. It does this by first looking for a constructor that takes "WebDriver" as its sole argument (public SomePage(WebDriver driver) {). If this is not present, then the default constructor is called. Sometimes, however, the PageObject depends on more than just an instance of the WebDriver interface. Should this be the case, it is possible to get the PageFactory to initialise the elements of an already constructed object:</p>
+
+		<p>MyPageObject page = new MyPageObject("title", driver);</p>
+		<p>PageFactory.initElements(driver, page);</p>
 	</aside>
 </section>
 <section>
@@ -1013,7 +1040,7 @@ Page Factory follows the concept of separation of Page Object repository and Tes
 	<aside class="notes">
 		One of the key advantage of using Page Factory pattern is AjaxElementLocatorFactory Class.
 
-It is working on lazy loading concept, i.e. a timeout for a WebElement will be assigned to the Object page class with the help of AjaxElementLocatorFactory .
+It is working on lazy loading concept or more specifically, the SlowLoadableContent class runs internally with the AjaxElementLocatorFactory. What that means it that it will execute a timeout for a WebElement that will be assigned to the Object page class with the help of AjaxElementLocatorFactory .
 
 Here, when an operation is performed on an element the wait for its visibility starts from that moment only. If the element is not found in the given time interval, test case execution will throw 'NoSuchElementException' exception.
 	</aside>
