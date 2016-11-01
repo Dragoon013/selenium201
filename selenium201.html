@@ -874,7 +874,16 @@ public class MyTestClass{
 	}
 }
 	</pre></code></p>
-	</pre></code></p>
+	<aside class="notes">
+		<h3>Advantages</h3>
+		<ol>
+			<li>With the Page Object Pattern we can separate the page operations, action flows, and UI tasks from the actual test execution and task verification. This concept makes our code cleaner and easy to understand.</li>
+			<li>Second benefit of POM is that the object repository is independent of testcases, so we can use the same object repository for a different purpose with different tools. For example, we can integrate POM with TestNG/JUnit for functional testing and at the same time with JBehave/Cucumber for acceptance testing.</li>
+			<li>Code becomes more atomic and optimized because of the reusable page methods in the POM classes. Which is one of the coure tenets of SauceLabs best practices</li>
+			<li>Methods get more realistic names which can be easily mapped with the operation happening in UI. For example, if after clicking on a page UI button we land on the home page, the method name fot the button could be called'gotoHomePage()'.</li>
+		</ol>
+		<h3>How to Implement</h3>
+		<p>Move all Web Elements that deal with the automation, and all methods that operate on these web wlements into a class file. Task and test verification should be separate as part of Test methods, so basically your remote authentication, desired capabilities, and asserts.</p>
 </section>
 <section>
 	<h3>POM Example</h3>
@@ -902,17 +911,17 @@ public class MyPageObject{
 	
 }
 	</pre></code></p>
+	<aside class="notes">
+		<p>So as you can see here we have our operational commands of selenium separated out into separate methods that have logical names.</p>
+	</aside>
 </section>
 <section>
-	<h3>POM Example</h3>
+	<h3>Instantiate the Page</h3>
 		<p>To utilize the page object we must instantiate it</p>
 		<p>The Test Page:
 			<pre><code class="java" contenteditable data-trim>
 import pages.MyPageObject;
 
-public static MyPageObject getPage(WebDriver driver) {
-		return PageFactory.initElements(driver, MyPageObject.class);
-	}
 
 public class MyTestCase extends MyPageObject {
 	WebDriver driver;
@@ -920,7 +929,9 @@ public class MyTestCase extends MyPageObject {
 	public String USERNAME = "your username";
 	public String ACCESS_KEY = "your access key";
 
-
+	public static MyPageObject getPage(WebDriver driver) {
+		return PageFactory.initElements(driver, MyPageObject.class);
+	}
 
 	@BeforeMethod
 	public void setup(){
@@ -950,9 +961,15 @@ public class MyTestCase extends MyPageObject {
 	     	} else {
 	        	restAPI.jobFailed(id);
 	    	}
-		}
+	}
 }
 	</pre></code></p>
+	<aside class="notes">
+		<p>We then import the test page. Extend its capabilities in the class. And then we can use a constructor that accepts a WebDriver as it's sole argument, then it retrieves the specific web driver that finds the elements. Then we can use that driver to run our page methods in a test method.</p>
+
+		<p>Now some of you may have noticed this weid bit of syntax here with the constructor "Page Factory..." (go to next slide)</p>
+	</aside>
+
 </section>
 <section>
 	<h3>Page Factory</h3>
@@ -978,12 +995,13 @@ public class MyPageObject extends PageBase{
 
 ...
 	</pre></code>
+	<div style="text-align:center;"><small>Documentation: <a href="https://github.com/SeleniumHQ/selenium/wiki/PageFactory" target="_blank">Page Factory</a></small></div>
 	<aside class="notes">
-		Page Factory is an inbuilt page object model concept for Selenium WebDriver but it is very optimized.
+		So what the heck is a page factory? Page Factory is an inbuilt page object model concept for Selenium WebDriver but it is very optimized.
 
-Here as well we follow the concept of separation of Page Object repository and Test methods. Additionally with the help of PageFactory class we use annotations @FindBy to find WebElement. We use initElements method to initialize web elements
+Page Factory follows the concept of separation of Page Object repository and Test methods. With the help of the PageFactory class we can use annotations @FindBy to find WebElement rather than use driver.findElementby. Once the elements are located, we use the initElements method to initialize them in our scripts, after the page object is instantiated of course.
 
-@FindBy can accept tagName, partialLinkText, name, linkText, id, css, className, xpath as attributes.
+@FindBy annotation can accept attributes like tagName, partialLinkText, name, linkText, id, css, className, and xpath.
 	</aside>
 </section>
 <section>
