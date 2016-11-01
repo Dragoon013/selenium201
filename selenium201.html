@@ -68,6 +68,8 @@
               </section>
 
               <section>
+ <!--IF JACOB IS TEACHING-->
+
 		<h3>Trainer Intro</h3>
 <!-- left column-->
                     <div style="float:left;width:50%;" class="centered">
@@ -95,6 +97,29 @@
                   <ul><li>Use the chat window</li></ul>
                 </ul>
               </section>
+ <!--IF James IS TEACHING-->
+ <!--          
+              <section>
+					<h3>Trainer Intro</h3>
+
+                    <div style="float:left;width:50%;" class="centered">
+                      <p>
+                      <strong>James Tacker</strong>
+                      <p>Technical Trainer</p>
+                      <p>M.A. Multimedia</p>
+                      <p>Previous (and current) Work:</p>
+                      <li>Atlassian</li>
+                      <li>Salesforce</li>
+                      <li>NGINX</li>
+                      <li>New Relic</li>
+
+					  </p>
+                    </div>
+
+                    <div style="float:right;width:50%;padding-right:0px;">
+                      <img src="assets/images/Picture1.png" style="border:0;background:none; width:75%; left:0; top:0;">
+                    </div>
+				</section>-->
 
 	      <section>
 		<h3>Prerequisites/Expectations</h3>
@@ -158,15 +183,9 @@
                 <h3>Agenda</h3>
 
                 <div style="text-align:left;">
-                    <!--<img src="assets/images/agenda.png" style="border:none; background:none; width:80%">-->
+                    <img src="assets/images/agenda.png" style="border:none; background:none; width:80%">
                 </div>
-		<ul>
-		    <li>Advanced Script Writing</li>
-		    <li>Waits</li>
-		    <li>Advanced Application Interactions</li>
-		    <li>Testing Frameworks and Page Abstraction</li>
-		    <li>Parallelization</li>
-		  </ul>
+		
 		<aside class="notes">
 		  <ul>
 		    <li>Advanced Script Writing</li>
@@ -290,12 +309,12 @@
 		      <li>Link Text</li>
                       <li>Partial Linktext</li>
                       <li>CSS</li>
-                      <li>XPath</li>
+                      <li>XPATH</li>
 		    </ul>
 		  </div>
 		  <aside class="notes">
 		    <p>There are a decent amount of identifiers out there. Most of them are easy to use, but there are two that consistently are touted by people in the selenium community, CSS and XPATH.</p>
-		    <p>There is a contention that XPATH is slower that CSS, but tests done by others, including dave haeffner of elemental selenium, has shown in a series of tests that there is no major difference. So at the end of the day, it comes down to how you can use it and how you can't, as well as preferrence.</p>
+		    <p>There is a contention that Xpath is slower that CSS, but tests done by others, including dave haeffner of elemental selenium, has shown in a series of tests that there is no major difference. So at the end of the day, it comes down to how you can use it and how you can't, as well as preferrence.</p>
 		  </aside>
 		</section>
 
@@ -611,22 +630,33 @@ alert.accept();
 		<section>
 		  <h3>Popups</h3>
 		  <pre><code class="java" data-trim contenteditable>
-		      String myWindowHandle = driver.getWindowHandle();
+		      String myWindowHandle = driver.getWindowHandles();
 
 driver.switchTo().window(myWindowHandle);
 		  </code></pre>
 
 		  <aside class="notes">
 		    <p>Hopefully you all know that alerts and pop-ups are not the same thing. Pop-ups are just other browser windows, and these can switched between easily with the switchTo() function.</p>
+		    <p>getWindowHandles()grabs current open popups so you can switch between handles in the array, getWindowHandle only selects the main window</p>
 		  </aside>
 		</section>
 		
+		<section>
 		<section data-state="lab">
 		  <h3>Lab 3: Advanced Page Interactions</h3>
 		  <ol>
-		    <li>cookie insertion for oauth</li>
+		    <li>Create an HTTP Cookie</li>
+		    <li>Set the cookie to bypass Authentication</li>
 		  </ol>
 		</section>
+		<section data-state="lab">
+		  <h3>Lab 3.5: Alert Messages</h3>
+		  <ol>
+		    <li>Use the switchTo() function to alternate between windows</li>
+		    <li>Click the 'Ok' prompt in the alert message</li>
+		  </ol>
+		</section>
+	</section>
 		
 <!--Waits Module-->
 		<section data-background="rgb(226, 35, 26)">
@@ -686,17 +716,25 @@ WebElement foo = fluentWait.until(new Function() {
 });
 		</code></pre>
 		<aside class="notes">
-		  <p>Fluent waits allow you to set a timeframe over which you want to test, and a polling interval as well. So you can set a timeout of 30 seconds (it will check over 30 sec.), have a polling of 5 seconds (will run the check every 5 seconds, within that 30 sec. timeout), and you can tell it to ignore common errors that may come up as well. </p>
-		  <p>Generally, Fluent Waits are used to detect changes in the properties of an element on a page. If you are waiting for the object to render or load, then an implicit or explicit wait will be a better solution.</p>
+		  <p>Fluent waits allow you to set a timeframe to for your wait, and then create a polling event to test that element. So for this example we have a timeframe of 30 seconds, and Selenium will only test for changes every 5 seconds within that 30. </p>
+		   <p>Each fluent wait instance defines the max time to wait for a condition, the polling interval, and optional ignore parameters. The best use case for using a fluent wait is if you have ajax application where certain web elements will appear for 1 second one time, and other times may take minutes to load. Another use case is to detect changes in properties of an element on a page like color, or value.</p>
+		  <p>However, if you are just waiting for the object to render or load, then an implicit or explicit wait will be a better solution.</p>
+		  <p>Once you've set the fluent wait parameters, you need to apply it to a local method to check for the condition.</p> 
+		  <p> The polling continues until there is a timeout based on 30 seconds (which is check against real time), or the condition becomes true</p>
+
+		  <p>This process will recur until either the timeout expires or the condition becomes true.</p>
+
+		  <p>After the timeout expires, the start time is checked against the current time. If the difference of the wait start time and the current time is less than the time set in <withTimeout(30, SECONDS)> method, then Step-2 will need to repeat.</p>
 		  <p>handy Link: <a href="http://www.techbeamers.com/webdriver-fluent-wait-command-examples/" target="_blank"></a></p>
 		</aside>
 	      </section>
 
 	      <section data-state="lab">
 		<h3>Lab 4: Fluent Waits</h3>
-		<p>It would be nice to have a good example of fluent waits vs. explicit waits here.</p>
+		<p>The example html page has text highlighting, as well as dynamic text. Create a fluent wait that will detect the following changes on the page:</p>
 		<ol>
-		  <li></li>
+		  <li>color of text</li>
+		  <li>presence of dynamic object (link text)</li>
 		</ol>
 	      </section>
 
@@ -803,6 +841,7 @@ WebElement foo = fluentWait.until(new Function() {
 		</section>
 				
 		<section>
+			<section>
                   <h3>Object Oriented Testing</h3>
                   <p>Page Objects</p>
                   <ul>
@@ -816,6 +855,98 @@ WebElement foo = fluentWait.until(new Function() {
 		    <p>Moving from the explicit to the abstract in order to make test maintentance easier</p>
 		  </aside>
 		</section>
+		<section>
+				<h3>POM Example</h3>
+				<p>Before Abstracted:
+					<pre><code class="java" contenteditable data-trim>
+public class MyTestClass{
+	@Test
+	public void main(){
+		WebDriver driver = new WebDriver();
+		driver.get("http://the-internet.herokuapp.com/checkboxes");	
+		//Find and click checkbox 1 element
+		driver.findElement(By.xpath("//*[@id=\"checkboxes\"]/input[1]")).click();
+		//Find and click checkbox 2 element
+		driver.findElement(By.xpath("//*[@id=\"checkboxes\"]/input[2]")).click();
+		//get page title from current WebDriver
+		String pageTitle = ((WebDriver) driver).getTitle();
+		//Send Assert
+		AssertJUnit.assertEquals(pageTitle, "The Internet");
+		}
+	}
+}
+	</pre></code></p>
+	</pre></code></p>
+</section>
+<section>
+	<h3>POM Example</h3>
+				<p>After Abstracted:
+					<pre><code class="java" contenteditable data-trim>
+public class MyPageObject{
+	WebDriver driver;
+	By checkbox1 = By.xpath("//*[@id=\"checkboxes\"]/input[1]");
+	By checkbox2 = By.xpath("//*[@id=\"checkboxes\"]/input[2]");
+	
+	public WebDriver getWebDriver(){
+		return driver.get("http://the-internet.herokuapp.com/checkboxes");
+	}
+	public void getCheckbox1(){
+		driver.findElement(checkbox1);
+	}
+	public void getCheckbox2(){
+		driver.findElement(checkbox2);
+	}
+	public String getPageTitle(){
+		return driver.getTitle();
+	}
+	
+}
+	</pre></code></p>
+</section>
+<section>
+	<h3>POM Example</h3>
+		<p>The Test Page:
+			<pre><code class="java" contenteditable data-trim>
+public class MyTestCase extends MyPageObject {
+	WebDriver driver;
+	DesiredCapabilities caps;
+	public String USERNAME = "your username";
+	public String ACCESS_KEY = "your access key";
+
+	@BeforeMethod
+	public void setup(){
+		caps = new DesiredCapabilities();
+		caps.setCapability("platform", "Windows 10");
+		caps.setCapability("browserName", "chrome");
+		caps.setCapability("version", "52.0");
+	}
+
+	@Test
+	public void checkBoxTest() {
+		driver = this.getWebDriver(caps);
+
+		driver.getCheckbox1().click();
+		driver.getCheckbox2().click();
+
+	AssertJUnit.assertEquals(driver.getPageTitle(), "The Internet");
+	}
+
+	@AfterMethod
+	public void teardown(ITestResult testResult) {
+
+    		driver.quit();
+    		SauceREST restAPI = new SauceREST(USERNAME, ACCESS_KEY);
+    		if (testResult.isSuccess()) {
+	        	restAPI.jobPassed(id);
+	     	} else {
+	        	restAPI.jobFailed(id);
+	    	}
+		}
+}
+	</pre></code></p>
+</section>
+</section>
+	
 		
 		<section>
 		  <h3>Converting a Simple Script</h3>
@@ -888,10 +1019,11 @@ hoverBtn1.perform();
 		  
 		  <section data-state="lab">
 		  <h3>Lab 5: I'm More than Just an Object</h3>
+		  <p>Convert an existing script into an abstracted script.</p>
 		  <ol>
-		    <li>Convert a simple script into one that is more abstracted.</li>
-		    <li>Give them a new script to work on, that has some parts built for them already. some familiar looking code perhaps, but hopefully some new stuff too, different actions to give them more take-home value.</li>
-		    <li>Have them follow the conversion steps</li>
+		    <li>Move all capabilitiy settings into a <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@BeforeMethod</span></pre></li>
+		    <li>Move all driver settings into <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@Test</span></pre> method(s)</li>
+		    <li>Place a pass/fail REST API call in an <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size:30px;">@AfterMethod</span></pre></li>
 		    <li>Run test</li>
 		  </ol>
 		</section>
@@ -996,8 +1128,9 @@ public static Object[][] sauceBrowserDataProvider(Method testMethod) {
 		<section data-state="lab">
 		  <h3>Lab 6: Parallelization Lab</h3>
 		  <ol>
-		    <li>add more @test annotated blocks</li>
-		    <li>make script run on more browser/OS combos</li>
+		    <li>Add more browser combinations via the @DataProvider</li>
+		    <li>Move all tests into separate classes, and retain local thread in base class</li>
+		    <li>Run Parallel tests</li>
 		  </ol>
 		</section>
 
