@@ -1040,14 +1040,31 @@ public class SearchMethod {
 	<aside class="notes">
 		One of the key advantage of using Page Factory pattern is AjaxElementLocatorFactory Class.
 
-It is working on lazy loading concept or more specifically, the SlowLoadableContent class runs internally with the AjaxElementLocatorFactory. What that means it that it will execute a timeout for a WebElement that will be assigned to the Object page class with the help of AjaxElementLocatorFactory .
+It is working on lazy loading concept or more specifically, the SlowLoadableContent class runs internally with the AjaxElementLocatorFactory. What that means it that it will execute a timeout for a WebElement that will be assigned to the Object page class with the help of AjaxElementLocatorFactory. This reduces the reliance on WebDriver.Wait and is helpful when you're refractoring your code to page objects.
 
-Here, when an operation is performed on an element the wait for its visibility starts from that moment only. If the element is not found in the given time interval, test case execution will throw 'NoSuchElementException' exception.
+In this specific example, when an operation is performed on an element the wait for its visibility starts from that moment only. If the element is not found in the given time interval, test case execution will throw 'NoSuchElementException' exception.
 	</aside>
 </section>
 </section>
-	
-		
+<section>
+	<h3>Page Object Summary</h3>
+	<ul>
+		<li>Public Methods = page "services"</li>
+		<li>DO NOT expose internals</li>
+		<li>Keep them small</li>
+		<li>Different results for similar actions are modeled as different methods</li>
+		<li>Assertions in Page Objects are bad</li>
+	</ul>
+	<aside class="notes">
+<ul>
+	<li>The public methods represent the services that the page offers. It's simplest to think of the methods on a Page Object as offering the "services" that a page offers rather than exposing the details and mechanics of the entire page.</li>
+	<li>PageObjects can be thought of as facing in two directions simultaneously. Facing towards the developer of a test, they represent the **services** offered by a particular page. Facing away from the developer, they should be the only thing that has a deep knowledge of the structure of the HTML of a page (or part of a page)As an example, think of the inbox of any web-based email system. Amongst the services that it offers are typically the ability to compose a new email, to choose to read a single email, and to list the subject lines of the emails in the inbox. How these are implemented shouldn't matter to the test.</li>
+	<li>That being said, it's best to keep each service in it's own method, and to keep it's logic small so that if something changes, for example a sign-on button moved into a different div, thus changing it's selector, you only have to edit that one page object method</li>
+	<li>One consequence of this approach is that it may be necessary to model (for example) both a successful and unsuccessful login, or a click could have a different result depending on the state of the app. When this happens, it is common to have multiple methods on the PageObject</li>
+	<li>And finally, the tests, not the PageObjects, should be responsible for making assertions about the state of a page. Reasons being it's annoying when you have a clever test method to handle your assertions but you have no idea what the test is asserting at a glance. So you then have to dive into the page object to find that buried assert. Assertions in page objects can cause more overhead because the page method is running everytime a test runs regardless of whether or not a particular test method needs that given assertions. This is why we abstract the asserts to the tests so that we can save minutes, if not hours to your overall test time. And finally the golden rule' one assertion per test. You don't want your tests failing for ambigious reasons because you buried them in a page object method</li>
+</ul>
+	</aside>
+		</section>
 		<section>
 		  <h3>Converting a Simple Script</h3>
 		  <ol>
