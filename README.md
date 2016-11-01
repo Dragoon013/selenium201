@@ -1,4 +1,4 @@
-# Sauce Labs: Selenium101 Training Course
+# Sauce Labs: Selenium201 Training Course
 
 You should be able to access the presentation at this location (temporarily) http://107.170.223.87/selenium201/selenium201.html
 
