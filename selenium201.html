@@ -358,7 +358,70 @@
 		      <p>The hazard in using either one of these is that they generally depend on the hierarchy of the html on the page itself to locate elements. If your developers make a chnage in where an element is located, these locators can break pretty easily. Convince them to ID and name elements instead!</p>
 		    </aside>
 		  </section>
+		  <section>
+		  	<h3>Basic CSS Selectors</h3>
+		  	<p>ID</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id#submit"))
+                    </code>
+                  </pre>
+            <p>Class</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id.submit"))
+                    </code>
+                  </pre>
+            <p>Child/Sub-Child</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id submit"))
+                    </code>
+                  </pre>
+            
+		  	<aside class="notes">
+
+		  	</aside>
 		</section>
+		<section>
+			<h3>Advanced CSS Selectors</h3>
+			<p>Attribute</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id[name='submit']"))
+                    </code>
+                  </pre>
+            <p>Multiple Attributes</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id[name='submit']"))
+                    </code>
+                  </pre>
+		</section>
+		<section>
+			<h3>Sub-String Matches</h3>
+			<p>Contains</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id[name*='submit']"))
+                    </code>
+                  </pre>
+			<p>Starts with</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id[name^='submit']"))
+                    </code>
+                  </pre>
+            <p>Ends with</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      driver.findElement(By.cssSelector("id[name$='submit']"))
+                    </code>
+                  </pre>
+			<aside class="notes">
+			</aside>
+	</section>
+</section>
 		
 		<section data-state="lab">
 		  <h3>Lab 1: Locators</h3>
