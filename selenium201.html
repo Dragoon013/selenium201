@@ -105,8 +105,14 @@
                     <div style="float:left;width:50%;" class="centered">
                       <p>
                       <strong>James Tacker</strong>
-                      <p>Technology Consultant & Trainer</p>
-                      <p>M.A. Multimedia</p>
+                      <p>Technology Consultant & Content Developer</p>
+                      <p>Previous Training Work:</p>
+                      <ul>
+                      	<li>NGINX</li>
+                      	<li>New Relic</li>
+                      	<li>Salesforce</li>
+                      	<li>Atlassian</li>
+                      </ul>
                       <p><a href="mailto:james.tacker@servicerocket.com">james.tacker@servicerocket.com</a></p>
 
 					  </p>
@@ -183,15 +189,6 @@
                 </div>
 		
 		<aside class="notes">
-		  <ul>
-		    <li>Advanced Script Writing</li>
-		    <li>Page Abstraction and Waits</li>
-		    <li>Advanced Application Intercations</li>
-		    <li>Set Up a Test Framework</li>
-		    <li>Parallelization</li>
-		    <li>Continuous Integration</li>
-		    <li>Selenium and CI Troubleshooting</li>
-		  </ul>
 		</aside>
               </section>
 
@@ -210,7 +207,7 @@
 	      
 <!--Adv. Scripts Module-->
               <section data-background="rgb(226, 35, 26)">
-                <h2>Advanced Script Writing</h2>
+                <h2>Advanced Locators</h2>
               </section>
 
                 <section>
@@ -276,6 +273,15 @@
 </ul>
 		    </aside>
 		</section>
+		<section>
+			<h3>Selenium WebDriver API</h3>
+			<img src="assets/images/bindings_diagram.png" style="border:0; text-align:center; background:none;">
+                    
+                    <aside class="notes">
+                      <p>Write code in language bindings, Selenium WebDriverAPI translates the code, sends those request to the corresponding web driver, driver sends response back to console.</p>
+                    </aside>
+                </section>
+
 		
 		<section>
 		  <h3>Locators Review</h3>
@@ -313,20 +319,6 @@
 		    <p>There is a contention that Xpath is slower that CSS, but tests done by others, including dave haeffner of elemental selenium, has shown in a series of tests that there is no major difference. So at the end of the day, it comes down to how you can use it and how you can't, as well as preferrence.</p>
 		  </aside>
 		</section>
-
-		<section>
-		  <h3>Locator Strategy</h3>
-		  <ol>
-		    <li>ID and Name</li>
-		    <li>Classes and CSS Selectors</li>
-		    <li>XPATH</li>
-		  </ol>
-		  
-		  <aside class="notes">
-		    <p>So what's the best way to actually write and identify locators on a page? Like with much of Selenium and testing in general, it depends on how your application or site is laid out, in the html and css.</p>
-		    <p>Generally, lcoating elements through their specific name or id is going to be the fastest method. But that can be a fantasy as far as modern web applications go. Second, you'd try to use the classes and then CSS Selectors. And finally, you'd want to use the XPATH. The XPATH selector is generally the locator of last resort due to its brittleness and slow speed on some specific browsers. Otherwise CSS Selectors will generally work out fine. </p>
-		  </aside>
-		</section>
 		
 		<section>
 		  <section>
@@ -352,35 +344,54 @@
 		      <li>XPATH tends to be faster on IE</li>
 		      <li>CSS tends to be faster on all other browsers</li>
 		      <p>Best choice is to use ID and Classes, which will be faster than traversing the DOM with CSS and XPATH selectors.</p>
+		      <div style="text-align:center;"><small>Documentation: <a href="https://saucelabs.com/resources/articles/selenium-tips-css-selectors" target="_blank">CSS Selector Tips</a></small></div>
+		      
 		    </ul>
 		    <aside class="notes">
 		      <p>There has been a debate for quite a while now on the merits of CSS vs xpath. All the benchmark tests that I've seen show that CSS is generally faster. But faster only means a couple of microseconds on most browsers.</p>
 		      <p>The hazard in using either one of these is that they generally depend on the hierarchy of the html on the page itself to locate elements. If your developers make a chnage in where an element is located, these locators can break pretty easily. Convince them to ID and name elements instead!</p>
 		    </aside>
-		  </section>
+		</section>
+			<section>
+			<h3>XPATH vs CSS - Use Cases</h3>
+			<ul>
+				<li>Dynamic IDs</li>
+				<li>Tabular Data</li>
+				<li>Flexibility</li>
+			</ul>
+			<aside class="notes">
+				<p>The primary use cases for using CSS Selectors and by extension, XPath, are if you have IDs but due to regression testing, or dynamic behavior, or if there is a grouping of elements with the same ID, then selectors or XPath would be the way to go.</p>
+				<p>Other uses cases are if you have tabular data that is also dynamic or nested deep in the page, and you're trying to pull values from a cell and insert into an arithmitic expression.</p>
+				<p>CSS and XPath give you the flexibility to travese the DOM more accurately but it's important to know some of the more advanced locators if we plan on utilizing them more efficiently. Modern web pages are becoming more style-centric so having that flexibility to combine multiple attributes makes CSS attractive to advanced users.</p>
+
+			</aside>
+		</section>
+		</section>
 		  <section>
+		  	<section>
 		  	<h3>Basic CSS Selectors</h3>
-		  	<p>ID</p>
+		  	<p>ID and Class</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id#submit"))
-                    </code>
-                  </pre>
-            <p>Class</p>
-                  <pre>
-                    <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id.submit"))
+#id
+driver.findElement(By.cssSelector("#submit"));
+#class
+driver.findElement(By.cssSelector(".submit"));
                     </code>
                   </pre>
             <p>Child/Sub-Child</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id submit"))
+                      driver.findElement(By.cssSelector("div a"))
                     </code>
                   </pre>
             
 		  	<aside class="notes">
-
+		  		<ul>
+		  			<li><strong>ID</strong>Prefixing the hash symbol to a selector allows us to target by id, do not use these too liberally because they don't allow for re-use. Instead use a class or a tag name. Or if using selenium, why not just locate using the FindbyElement.id class?</li>
+		  			<li><strong>Class</strong>the dot represents a class selector. The main difference between id and class is the with the class locator you can target multiple elements. So for example if you're styling a group of elements use a class. But if you're trying to find something deeply nested in page like a needle in a haystack ids might be the best bet.</li>
+		  			<li><strong>Child or Sub-Child</strong> The white space indicates a child or a sub-child selector. Also known as a 'descendant' selector, this is one of the more common CSS selectors. Use this when you want to be more specific with your actions. For example if you need to access an anchor tag in a specific div rather than searching all divs.</li>
+		  		</ul>
 		  	</aside>
 		</section>
 		<section>
@@ -388,79 +399,174 @@
 			<p>Attribute</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id[name='submit']"))
+                      driver.findElement(By.cssSelector("div[name='submit']"))
                     </code>
                   </pre>
             <p>Multiple Attributes</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id[name='submit']"))
+                      driver.findElement(By.cssSelector("div[name='submit'] [data-type='button']"))
                     </code>
                   </pre>
+
+                  <aside class="notes">
+                  	<ul>
+                  		<li><strong>Attributes</strong> The attributes selector allows us to target elements by specific attribute values by nesting that information in between a pair of brackets []. This is useful if you're trying to target or identify a specific styling.</li>
+                  		<li><strong>Multiple Attributes</strong>You can also daisy chain the attributes by placing new [] with other attributes, as long as they're encased by quotations.</li>
+                  	</ul>
+                  </aside>
 		</section>
 		<section>
 			<h3>Sub-String Matches</h3>
 			<p>Contains</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id[name*='submit']"))
+                      driver.findElement(By.cssSelector("div[name*='submit_button']"))
                     </code>
                   </pre>
 			<p>Starts with</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id[name^='submit']"))
+                      driver.findElement(By.cssSelector("div[name^='submit_']"))
                     </code>
                   </pre>
             <p>Ends with</p>
                   <pre>
                     <code class="java" data-trim contenteditable>
-                      driver.findElement(By.cssSelector("id[name$='submit']"))
+                      driver.findElement(By.cssSelector("div[name$='_button']"))
                     </code>
                   </pre>
 			<aside class="notes">
+				<ul>
+					<li><strong>'Match a sub-string'</strong>Using an asterik along with and equal modifier will attempt to find an element attribute based on the text value</li>
+					<li><strong>'Match a Prefix'</strong>The carrot symbol along with an equal modifier will attempt to find an element attribute that starts with whatever text characters you specific</li>
+					<li><strong>'Match a Suffix'</strong>And finally, the Dollar sign along with the equal modifier will attempt to match the end of an element attribute text value</li>
+				</ul>
 			</aside>
 	</section>
+	<section>
+		<h3>Other Locators</h3>
+		<ul>
+			<li>adjancent elements (~ or +)</li>
+			<li>pseudo-classes</li>
+			<ul>
+				<li>:after || :before</li>
+				<li>:contains</li>
+				<li>:hover</li>
+			</ul>
+		</ul>
+		<div style="text-align:center;"><small>Documentation: <a href="https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048" target="_blank">Pro CSS Tips</a></small></div>
+		<aside class="notes">
+			<ul>
+				<li><strong>Adjacent Selectors</strong> are useful if you only want to target immediately after the specified element. The difference between the + and ~ symbol is that the tilde is less strict</li>
+				<li><strong>Psuedo-Classes</strong> are interesting because they allow us to target elements based on unique behavoirs such as contains will check the inner text of an element and hover is classified as a user action psuedo-class which will allows us to make styling changes or locator commands based on whether a user is hovering over an element.</li>
+			</ul>
+			<p>For more information about the many many selectors that are available and perhaps ways to cleverly use them when you're finding elements, plese checkout the link below</p>
+		</aside>
 </section>
+</section>
+<section>
+	<h3>XPath: Relative vs. Absolute</h3>
+	<ul>
+		<li>Absolute: starts from the root element of page or </li>
+		<li>Relative: built around adjacent nodes in DOM</li>
+		
+	</ul
+	
+	<p><pre>
+        <code class="css" data-trim contenteditable>
+#Absolute
+HTML/head/body/table/tr/td; 
+#Relative
+//table/tr/td; 
+                    </code>
+                  </pre></p>
+<aside class="notes">
+	<p><strong>Absolute:</strong> It starts from the root element within the web page or part of the page and goes to identify the target element. To use locators like the XPath is easy as you give the direct element path. But the XPath would break when the element structure changes.</p>
+	<p><strong>Relative:</strong> The relative XPath are easy to manage as they are short and concise. It is also better than the previous XPath style as it may survive the changes in the Page HTML to a certain degree. Though, building a relative XPath is time-consuming and quite difficult as you need to check all the nodes to form the path. It does however, guarantee more accurate locators.</p>
+</aside>
+</section>
+
+<section>
+		  <h3>Locator Priority Recap</h3>
+		  <ol>
+		    <li>ID and/or Name</li>
+		    <li>Classes</li>
+		    <li>Tell Devs to create Id/Class</li>
+		    <li>CSS Selectors</li>
+		    <li>XPATH</li>
+		  </ol>
+		  
+		  <aside class="notes">
+		    <p>So what's the best way to actually write and identify locators on a page? Like with much of Selenium and testing in general, it depends on how your application or site is laid out, in the html and css.</p>
+		    <p>Generally, lcoating elements through their specific name or id is going to be the fastest method. But that can be a fantasy as far as modern web applications go. Second, you'd try to use the classes and then CSS Selectors. And finally, you'd want to use the XPATH. The XPATH selector is generally the locator of last resort due to its brittleness and slow speed on some specific browsers. Otherwise CSS Selectors will generally work out fine. </p>
+		  </aside>
+		</section>
 		
 		<section data-state="lab">
 		  <h3>Lab 1: Locators</h3>
 		  <ol>
-		    <li>Sign into Saucelabs.com Account</li>
-		    <li>Fill out credentials in the script</li>
-		    <li>Write Locators: ID, CSS, and XPAth</li>
-		    <li>Speedtest Demo here (cat's paws)</li>
-		    <li>ABSOLUTELY NO LOCAL TESTING</li>
+		    <li>Open Eclipse and navigate to <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">SampleLocatorTest.java</pre></li>
+		    <li>Open Eclipse and replace <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">USERNAME =</pre> <pre style="display:inline; color:rgb(0,0,0);"><span style="font-size: 30px;">"SAUCE USERNAME"</pre> and <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">ACCESS_KEY =</pre><pre style="display:inline; color:rgb(0,0,0);"><span style="font-size: 30px;"> "SAUCE ACCESS_KEY"</pre>, with your <a href="https://saucelabs.com">Saucelabs.com</a> account credentials</li>
+		    <li>Ensure the test URL is <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">driver.get("http://the-internet.herokuapp.com/large")</pre></li>
+		    <li>Uncomment the two ID and XPath locators: <pre style="display:inline; color:rgb(87,193,232);">WebElement tableID = driver.findElementById("");</pre>
+<pre style="display:inline; color:rgb(87,193,232);">WebElement table50 = driver.findElementByXPath("");</pre><span style="font-size: 30px;"></li>
+		    <li>Find a value in one of the table cells and write a CSS Locator to print out that value using: <pre style="display:inline; color:rgb(87,193,232);">System.out.println(someWebElement);</pre></li>
 		  </ol>
 		  <aside class ="notes">
 		  	<p>So for this lab we're going to demonstrate the different types of locators we can use, talk about how they traverse the DOM given that there's a page with elements that are nested deeply within the page, and we will print out the results.</p>
 
 		  	<p>First, we need to enter our Sauce Labs authentication details for the script, so go to your account details at saucelabs.com if you haven't already and copy that into the variablrs "YOUR_USERNAME" and "ACCESS_KEY"</p>
 
-		  	<p>Then, we will open up http://the-internet.herokuapp.com/large and note the complicated nesting of each of these webelements. Now, when we're talking about which location method is faster, this is one of the variables we need to consider. If we want to traverse one way, i.e. down the page CSS Locators are recommended, if we need to locate an elment down the page, and then traverse back up the page, we will need Xpath</p>
+		  	<p>Then, we will open up http://the-internet.herokuapp.com/large and note the complicated nesting of each of these webelements. As you can see we have a very large table with deeply nested elements. There are many needle-in-haystacks as they're often referred to. If we want to traverse one way, i.e. down the page CSS Locators are recommended, if we need to locate an elment down the page, and then traverse back up the page, we will need Xpath</p>
 
-		  	<p>So let's write locators for this table-ID by inspecting the element</p>
+		  	<p>So let's uncomment the two ID and Xpath locators for the table ID, in our script </p>
 		  	<pre><code class="java" data-trim contenteditable>
 WebElement tableID = driver.findElementById("large-table");
 </code></pre>
-<p>Then we will choose 2 elements in the table, I'm going to choose 50, and write Xpath and CSS Locators for both</p>
+			<p>Then we will choose 2 elements in the table, I'm going to choose some column in row 50-51, and write Xpath and CSS Locators for both</p>
 
 <pre><code class="java" data-trim contenteditable>
 WebElement table50 = driver.findElementByXPath("//*[@id=\"large-table\"]/tbody/tr[50]/td[20]");
 WebElement table51 = driver.findElementByCssSelector("#large-table > tbody > tr.row-50 > td.column-19");
 </code></pre>
 
-<p>Then we will print out the results</p>
+			<p>Then we will print out the results</p>
 <pre><code class="java" data-trim contenteditable>
 System.out.println(tableID);
         System.out.println(table50);
         System.out.println(table51);
     </code></pre>
+
+    <p>Now our CSS loctor is not very effecient because it's unecessarily calling the ID and the class. We could just get rid of everything up to tr.row, and rather than use a >, which represents a direct child, we could just use a descendant locator and have <pre><code class="java" data-trim contenteditable>("tr.row-50 td.column-19");</code></pre></p>
+
+    <p>After we've optimized our CSS Selector, let's go ahead and assert the inner text of that particular cell just to make sure it's still grabbing the right value.</p>
+
+    <pre><code class="java" data-trim contenteditable>
+    	assertEquals(table51.gettext(), "50.19");</code></pre>
+
+    	<p>Test in SauceLabs to make sure everything is working correctly</p>
 </aside>
 
 		</section>
 		
-		<section>
+		
+		<!--Actions Module-->
+              <section data-background="rgb(226, 35, 26)">
+                <h2>Simulating Actions</h2>
+              </section>
+              
+              <section>
+                  <h3>Module Objectives</h3>
+                  <p>This module enables you to:</p>
+                  <ul>
+                    <li>Explore the Action Class</li>
+                    <li>Understand when to use multiple actions vs. chained actions</li>
+                    <li>Identify use cases for the JS Executor class</li>
+		  </ul>
+                  <aside class="notes"></aside>
+                </section>
+                <section>
 		  <h3>Actions Review</h3>
                   <pre>
                     <code class="java" data-trim contenteditable style="text-align:center;">
@@ -468,7 +574,7 @@ System.out.println(tableID);
                     </code>
                   </pre>
 		  <aside class="notes">
-		    <p>Actions work the same way that they always have. You locate an element, and then you can perform one of the standard clicks, submits, sendkeys on that located element.</p>
+		    <p>Actions work the same way that they always have. You locate an element, and then you can perform one of the standard clicks, submits, sendkeys on that located element. So with this example we're doing all of the actions in one go</p>
 		  </aside>
 		</section>
 
@@ -502,7 +608,7 @@ action.contextClick(button).build().perform();
 		  </pre>
 		  <p>Chain actions together to make a consolidated action object</p>
 		  <aside class="notes">
-
+		  	<p>So rather than executing the actions in one go, you can place the desirable actions in an actions, class which will allow you to not only chain them, but also re-use them throughout the script.</p>
 		  </aside>
 		</section>
 
@@ -563,7 +669,7 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 		    </code>
 		    </pre>
 		  <aside class="notes">
-		    <p>The Actions class also includes a directive to intiate a drag and drop.</p>
+		    <p>The Actions class also includes a directive to intiate a drag and drop. It's best however to define the elements in variables first based on their relative x, y coordinates, rather than explicitly hard-coding those coordinates in the dragandDrop action</p>
 		  </aside>
 		</section>
 
@@ -575,11 +681,12 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 		    </code>
 		  </pre>
 		  <aside class="notes">
-		    <p>The best way to switch the focus between elements in a script is to use the moveToElement function.</p>
+		    <p>The best way to switch the focus between elements in a script is to use the moveToElement function. What we mean by focus is simply moving the mouse to a point or element and stopping. This is the best action to hover over an element or if you have a sequence of movements that need to be precise.</p>
 		  </aside>
 		</section>
 
 		<section>
+			<section>
 		  <h3>Selenium JS Executor</h3>
 		  <p>Executes JavaScript in the context of the currently selected frame or window. The script fragment provided will be executed as the body of an anonymous function.</p>
 		  <pre>
@@ -594,6 +701,27 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 		    <p>Execute an asynchronous piece of JavaScript in the context of the currently selected frame or window. Unlike executing synchronous JavaScript, scripts executed with this method must explicitly signal they are finished by invoking the provided callback. This callback is always injected into the executed function as the last argument.</p>
 		  </aside>
 		</section>
+		<section>
+			<h3>JS Executor Examples</h3>
+			<p>JS Executor Click</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      JavascriptExecutor js = ((JavascriptExecutor) driver);
+                        js.executeScript("arguments[0].click();", element);
+                    </code>
+                  </pre>
+            <p>Scroll a vertical page</p>
+                  <pre>
+                    <code class="java" data-trim contenteditable>
+                      JavascriptExecutor js = (JavascriptExecutor)driver;
+  			js.executeScript("window.scrollBy(0,50)");
+                    </code>
+                  </pre>
+                  <div style="text-align:center;"><small>Documentation: <a href="http://www.ufthelp.com/2014/11/what-is-javascriptexecutor-in-selenium.html" target="_blank">JS Executor Examples</a></small></div>
+                  <div style="text-align:center;"><small>Documentation: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/JavascriptExecutor.html" target="_blank">Class Reference</a></small></div>
+                  <aside class="notes">These are some common examples of how to use the JS Executor, provided by the JS Executor documentation page which is listed for you at the bottom. However the most common use case for using a JS Executor is to simulate and/or handle AJAX calls. So for more information on that topic because it's a bit out of scope for this course, click the link below for more info and examples</aside>
+		</section>
+	</section>
 		
 		<section>
 		  <h3>Accessibility Testing</h3>
@@ -609,21 +737,21 @@ dragNDrop.dragAndDrop(elementA, elementB).perform();
 		    <p></p>
 		  </aside>
 		</section>
-		
 	
 		<section data-state="lab">
 		  <h3>Lab 2: Action Class</h3>
 		  <p>In this lab we will explore the action class</p>
 		  <ol>
 		    
-		    <li>Locate images via CSS Selector</li>
-		    <li>Hover over an element</li>
-		    <li>Click on a figcaption</li>
-		    <li>Review the test on sauce labs.</li>
-		    <li>Create a second action to click on the figcaption of the hover object</li>
+		    <li>In <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">SampleLocatorTest.java</pre>, uncomment the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">'Lab2'</pre> section</li>
+		    <li>Locate the first image in this <a href="http://the-internet.herokuapp.com/hovers">URL,</a> via a CSS Selector</li>
+		    <li>Create a hover <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Action</pre> with <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">moveTo()</pre></li>
+		    <li>Create a second <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Action</pre> that uses <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">click()</pre></li>
+		    <li>Click on the appropriate figcaption using a CSS selector and a <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">WebDriverWait</pre></li>
+		    <li>Run a Maven test and check the results in <a href="https://saucelabs.com">Saucelabs.com</a></li>
 		  </ol>
 		<aside class="notes">
-		<p>So in this lab we're going to hover over an image, and click on the figcaption at http://the-internet.herokuapp.com/hovers (show the class)</p>
+		<p>In this lab we're going to hover over an image, wait for a figcaption to display a hyper link, and click on the hyperlink. So let's open up the URL and demo what we're trying to achieve</p>
 
 		<p>Comment out our existing locators for lab 1, and scroll down to the section entitled lab 2, let's go ahead and uncomment the lab 2 section</p>
 
@@ -637,7 +765,6 @@ WebElement fig = driver.findElementByCssSelector("#content > div > div:nth-child
 		<pre><code class="java" contenteditable data-trim>
 //set Actions
         Actions action = new Actions(driver);
-
 
         //set waits
         WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -680,10 +807,9 @@ fig.click();
 
 	}
 </code></pre>
+<p>We can use a Thread.sleep at the end of the script if we want to see the results in or video capture log in SauceLabs.com, but using a Thread is bad practice when you're administering a heavy load of cross-browser testing.</p>
 </aside>
 		</section>
-
-
 
 		
 	      <!--Adv. Application Interactions Module-->
@@ -700,6 +826,20 @@ fig.click();
                 </section>
 
 		<section>
+			<section>
+				<h3>Authentication</h3>
+				<ul>
+					<li>Different Browsers handle auth differently</li>
+					<li>Most cases a base url will suffice</li>
+					<li>If using self-signed certs, can click override link</li>
+				</ul>
+					<pre><code class="java" data-trim contenteditable>
+					driver.navigate().to("javascript:document.getElementById('overridelink').click()");
+}
+</code></pre>
+<aside class="notes">It's important to note here that depending on the browser you're dealing with, the behavior for authentication can be unpredicatble. For example, if you're trying to test basic auth by Safari, it's not fully supported. So even if you pass authentication details in the header of your request, safari by default, and also based on the browser preferences, will throw an alert message that warns the user of unsafe, or fraudulant websites. There are two ways to circumvent this: either you add what's called a 'prerun' executable that will force the browser to behave a certain way before the test runs, or you use this line of code here in an attempt to step through the warning message. Of course this requires you to understand how the alert message instanitates, and also have knowledge of it's ID, Xpath, and/or CSS locator.</aside>
+			</section>
+			<section>
 		  <h3>Basic Authentication</h3>
 		  <pre><code class="java" data-trim contenteditable>
 		      driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
@@ -731,7 +871,9 @@ driver.manage().addCookie(cookie);
 		  
 		  <div style="text-align:center;"><small>Documentation: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/Cookie.html" target="_blank">Cookies</a></small></div>
 		   <div style="text-align:center;"><small>Documentation: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebDriver.Options.html" target="_blank">Webdriver Cookie Options</a></small></div>
+		   <aside class="notes">So this is the cookie builder sub-class in java, the links to the documentation are located at the bottom. Each language binding will have it's own version of this functionality, so check your language documentation for specific deals. The basic idea here is to create a cookie, assign an name and value, set the parameters such as: expiration date, the domain the cookie is set for, the path to your JSP or application that the cookie is set for, and whether or not the cookie can bypass authentication--which is indicated by the isSecure parameter.</aside>
 		</section>
+	</section>
 
 		<section>
 		  <section>
@@ -747,6 +889,7 @@ driver.setFileDetector(new LocalFileDetector());
 WebElement fileInput = driver.findElement(By.id("file-upload"));
 fileInput.sendKeys("/Absolute/Path/to/Image.png");
 		    </code></pre>
+		    <aside class="notes">The file upload capabilities of Selenium will allow to simulate a POST or PUT HTTP method, if you have such features enabled on your site under test. To enable it, you simplyl have to set a file detector, and then based on the upload method whether it's a button or link, you reference it as a WebElement</aside>
 		  </section>
 
 		  <section>
@@ -794,35 +937,30 @@ driver.switchTo().window(myWindowHandle);
 		<section data-state="lab">
 		  <h3>Lab 3: Cookie Insertion</h3>
 		  <ol>
-		    <li>Create an HTTP Cookie</li>
-		    <li>Set the cookie to bypass Authentication (admin:admin)</li>
-		    <li>Set the cookie, and print out all existing cookies</li>
-		    <li>Delete all cookies</li>
+		    <li>Open BasicAuthTest.java</pre></li>
+		    <li>Uncomment the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">myCookie()</pre> Cookie builder</li>
+		    <li>Try and set the cookie to bypass Authentication at: <a href="http://the-internet.herokuapp.com/basic_auth" target="_blank">"http://the-internet.herokuapp.com/basic_auth"</a></li>
+		<li>Run <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">myCookie()</pre> in the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@Test</pre> location</li>
+		<li>If the cookie is unsuccessful, try appending <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">(admin:admin@)</pre> at the beginning of the URL</li>
+		    <li>Set and print existing cookies using:</li>
+		    <pre><code class="java" data-trim contenteditable>Set&#60;Cookie&#62; allCookies = driver.manage().getCookies(); 
+	for (Cookie loadedCookie : allCookies) {
+		System.out.println(String.format("%s -> %s", 
+		loadedCookie.getName(), loadedCookie.getValue()));
+	}</code></pre>
 		  </ol>
 		  <aside class="notes">
-		  		<p>Correct URL endpoint: driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");<p>
-		  		<p>ADD A Cookie</p>
-				<pre><code class="java" data-trim contenteditable>
-Cookie ck = new Cookie("cookie", "blast_off");
-        driver.manage().addCookie(ck);
-        System.out.println(ck);
-    </code></pre>
-		  		
-		  		<p>Set Cookie:</p>
-		  		<pre><code class="java" data-trim contenteditable>
-Set<Cookie> allCookies = driver.manage().getCookies();
-        for (Cookie loadedCookie : allCookies) {
-            System.out.println(String.format("%s -> %s", loadedCookie.getName(), loadedCookie.getValue()));
-	</code></pre>
-		  		<p>Delete Cookies:</p>
-<pre><code class="java" data-trim contenteditable>
-driver.manage().deleteAllCookies();
-         System.out.println("Deleting Cookies" + allCookies);
-         Set<Cookie> remainingCookies = driver.manage().getCookies();
-         System.out.println("Remaining Cookies" + remainingCookies);
-</code></pre>
+		  	<p>So this lab is a bit exeperimental, and what I mean by that is that it's not always successful depending on what your origin IP and whatever corporate firewall rules you have. Having said that we should be able to predict the behaviors because we're all using remote environments.</p>
+
+		  	<p>First off: we ened to uncomment our public cookie builder so we can create a cookie</p>
+		  	<p>Go ahead and add whatever parameters you wish, and then in the @Test method, we're going to call this cookieBuilder so we can set the cookie</p>
+
+		  	<p>(do the first steps of the lab)</p>
+
+		  	<p>Now in this particular script it's going to fail because of one reason, we have to wait for the entire page to load before a cookie can be added, and because the page isn't loading due to the basic auth window this approach won't work</p>
 		  </aside>
 		</section>
+
 		<!-- <section data-state="lab">
 		  <h3>Lab 3.5: Alert Messages</h3>
 		  <ol>
@@ -876,6 +1014,7 @@ WebElement messageElement = wait.until(
               </section>
 
 	      <section>
+	      	<section>
 		<h3>Fluent Waits</h3>
 		<pre><code class="java" contenteditable data-trim>
 		    Wait fluentWait = new FluentWait(driver)
@@ -902,12 +1041,47 @@ WebElement foo = fluentWait.until(new Function() {
 		  <p>handy Link: <a href="http://www.techbeamers.com/webdriver-fluent-wait-command-examples/" target="_blank"></a></p>
 		</aside>
 	      </section>
+	      <section>
+	      	<h3>Fluent Wait Methods</h3>
+	      	<div class="fragment" data-fragment-index="1" style="vertical-align:left; margin-left: auto; margin-right: auto;"><p><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Function()</pre>: interface requiring a class</p></div>
+	      	<ul>
+	      		<div class="fragment" data-fragment-index="2" style="vertical-align:left; margin-left: auto; margin-right: auto;"><li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">apply(F from)</pre></li></div>
+	      		<div class="fragment" data-fragment-index="3" style="vertical-align:left; margin-left: auto; margin-right: auto;"><li><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">equals(Object obj)</pre</li></div>
+	      	</ul>
+	      	<div class="fragment" data-fragment-index="4" style="vertical-align:left; margin-left: auto; margin-right: auto;"><p><pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Predicate()</pre>: expects a boolean expression</p></div>
+	      	<aside class="notes">
+	      		<p>So sometimes we might need more than what is present in ExpectedConditions. If you pay close attention to the .until() in the fluent wait method you will realize that is an overloaded function that can take two types of parameters</p>
+				<ul>
+					<li>A Function is a general interface which requires the class to define any parameterized methods. Here we can set an apply(F from) or a equals(Object obj). It's important to set the the signature of the apply method. This Method for example can accept a WebDriver as the input argument and perhaps return a Boolean, Integer, or String value. Then using the equals method we can check CSS or element values and return the value.</li>
+					<li>A predicate is similar to a function. But it always returns a Boolean expression. So if you want to check the value of a dynamically chainging object and set it to a true or false statement, which is more pratical for your assertions, then use a predicate</li>
 
+				</ul>
+	      	</aside>
+	      </section>
+	  </section>
+<section data-state="lab">
+		<h3>Lab 4: Explicit Waits</h3>
+		<ol>
+			<li>Open <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">SampleWaitTest.java</pre></li>
+			<li>Create a <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">click()</pre> for the <a href="http://the-internet.herokuapp.com/dynamic_loading" target="_blank">loading page</a> URL</li>
+			<li>Create a <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">click()</pre> for the 'Start' button</li>
+			<li>Use a <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">wait</pre> to <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">assert</pre> the value of the inner text</li>
+		</ol>
+	<aside class="notes"></aside>
+	</section>
 	      <section data-state="lab">
-		<h3>Lab 4: Fluent Waits</h3>
-		<p>The example html page has text highlighting, as well as dynamic text. Create a fluent wait that will detect the following changes on the page i.e. color of text</p>
+		<h3>Lab 4.5: Fluent Waits</h3>
+		<ol>
+			<li>Open <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">SampleFluentWait.java</pre></li>
+			<li>Uncomment <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">driver.get("");</pre> in the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@Test</pre> section</li>
+			<li>Uncomment the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">changingColor()</pre> fluent wait</li>
+			<li>Set a <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">Predicate</pre> to check <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">rbg</pre> values of the 'dynamic_color' element</li>
+			<li>Run the test and check the results in <a href="https://saucelabs.com">Saucelabs.com</a></li>
+		</ol>
 		<aside class="notes">
-			<p>(optionally show SampleWaitTest.java as a good example to use explcit waits, although this lab will not be a "true" use case for when to use FluentWaits, you should outline the fact that testing for a small change in the website when running 100 cross broswer tests will cause your test cycle to be much longer than expected due to the nature of explicit waits and how they run the tests as fast as they can. With polling i.e. fluentwaits it gives us the option to minimize testing time in intervals)</p>
+			<p>The example html page has text highlighting, as well as dynamic text. Create a fluent wait that will detect the following changes on the page i.e. color of text</p>
+			<p></p>
+			
 
 <p>Note: make sure to change desired caps if you're testing on the saucelabs website</p>
 			<p>Here is the fluent wait:</p>
@@ -931,14 +1105,25 @@ WebElement foo = fluentWait.until(new Function() {
 
 	}
 </code></pre>
-
-
 		</aside>
+	      </section>
+
+	      <section>
+	      	<h3>Abstracted Waits</h3>
+	      	<p>Wrap wait in a method so that it is reusable</p>
+	      	<pre><code class="java" contenteditable data-trim>
+By element = By.id("myId");
+	public WebElement clickableWait(By locator, Integer timeout) {
+	timeout = timeout != null ? timeout : 10;
+	WebDriverWait wait = new WebDriverWait(driver, timeout);
+	return wait.until(ExpectedConditions.elementToBeClickable(locator));
+}
+	      	</pre></code>
 	      </section>
 
 <!--Testing Frameworks and Page Abstraction Module-->
                 <section data-background="rgb(226, 35, 26)">
-                  <h2>Page Objects and Page Abstraction</h2>
+                  <h2>Page Objects and Abstraction</h2>
                 </section>
 
                 <section>
@@ -978,6 +1163,8 @@ WebElement foo = fluentWait.until(new Function() {
                     <p><strong>Ruby:</strong></p>
                     <li>RSpec</li>
                     <li>Cucumber</li>
+                    <p>
+                  </p>
                   </div>
 
                   <div style="float:right;width:50%;padding-right:0px;">
@@ -988,8 +1175,13 @@ WebElement foo = fluentWait.until(new Function() {
                     <p><strong>JavaScript:</strong></p>
                     <li>Protractor</li>
                     <li>Nightwatch</li>
-
+					<p>
+                  </p>
                   </div>
+
+
+                  <div style="text-align:center;"><small>Examples: <a href="https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/Cookie.html" target="_blank">Sauce Labs Sample Test Frameworks</a></small></div>
+
                   <aside class="notes">
 
                     <p>JavaScript:</p>
@@ -1019,7 +1211,6 @@ WebElement foo = fluentWait.until(new Function() {
 		  <ul>
 		    <li>Inspired by JUnit and NUnit</li>
 		    <li>Aims to cover wider range of types of testing</li>
-		    <li>Easier to use</li>
 		  </ul>
                   <aside class="notes">
 		    <p>The testing framework that we are using today is TestNG. One big benefit of using a testing framework are the annotations, the @x that you see scattered through testing scripts. These help faciliate the design and build of a testing suite, allowing you designate particular functions as set-up, teardown, or actual tests. This makes it very easy to organize your code and tests, which makes maintaining them much less of a hassle. It also automates a lot of the ordering and funcion calls that you would have to make explicitly without the annotations.</p>
@@ -1041,7 +1232,74 @@ WebElement foo = fluentWait.until(new Function() {
 		    <p></p>
 		  </aside>
 		</section>
-				
+				<section>
+		  <h3>Converting a Simple Script</h3>
+		  <ol>
+		    <li>Open basic scripts</li>
+		    <li>Identify code that fits into at least 3 different sections</li>
+		    <ul>
+		      <li>Set-up</li>
+		      <li>Test(s)</li>
+		      <li>Teardown</li>
+		    </ul>
+		    <li>Separate the different parts into functions with the appropriate annotations</li>
+		    <li>Analyze script for any repetitive identifications or actions and store values/actions in variables</li>
+		  </ol>
+		  <aside class="java">
+		    <p></p>
+		  </aside>
+		</section>
+
+		<section>
+		  <section>
+		    <h3>Example Script</h3>
+		    <p>Parts of a complete test framework abstracted script</p>
+		    <div style="text-align:center;"><img style="width:75%;" src="assets/images/pre-abstract.png"></img></div>
+		  </section>
+		  
+		  <section>
+		    <h3>Abstracted Script</h3>
+		    <p>Parts of a complete test framework abstracted script</p>
+		    <div style="text-align:center;"><img style="width:73%;" src="assets/images/after-abstract.png"></img></div>
+		  </section>
+		  
+		  <section>
+		    <h3>Abstraction Example 1</h3>
+		    <p>Before:</p>
+		    <pre><code class="java" data-trim contenteditable>
+			driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
+...
+driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
+		    </code></pre>
+		    <p>After:</p>
+		    <pre style="width:101%;"><code class="java" data-trim contenteditable>
+			WebElement button = driver.findElement(By.xpath("//div[2]/div/div/div/button"));
+button.click();
+...
+button.click();
+		    </code></pre>
+		    
+		  </section>
+		
+		  <section>
+		    <h3>Abstraction Example 2</h3>
+		    <p>Before:</p>
+		    <pre><code class="java" data-trim contenteditable>
+		      WebElement hoverElement = driver.findElement(By.id("button"));
+Actions builder = new Actions(driver);
+
+builder.moveToElement(hoverElement).build().perform();
+		    </code></pre>
+		  
+		    <p>After:</p>
+		  <pre style="width:94%;"><code class="java" data-trim contenteditable>
+		      WebElement hoverElement = driver.findElement(By.id("btn1"));
+Action hoverBtn1 = new Actions(driver).moveToElement(hoverElement).build();
+			 
+hoverBtn1.perform();
+		  </code></pre>
+		</section>
+		   </section>
 		<section>
 			<section>
                   <h3>Object Oriented Testing</h3>
@@ -1057,6 +1315,18 @@ WebElement foo = fluentWait.until(new Function() {
 		    <p>Moving from the explicit to the abstract in order to make test maintentance easier</p>
 		  </aside>
 		</section>
+		<section>
+			<h3>Page Abstraction Steps</h3>
+			<ol>
+				<li>Create a <pre style="display:inline; color:red;"><span style="font-size:30px;">TestBase</pre> class</li>
+				<li>Create a <pre style="display:inline; color:red;"><span style="font-size:30px;">PageBase</pre> class</li>
+				<li>Abstract tests/tasks into <pre style="display:inline; color:red;"><span style="font-size:30px;">TestBase</pre> class</li>
+				<li>Abstract page interactions into <pre style="display:inline; color:red;"><span style="font-size:30px;">PageBase</pre> class</li>
+				<li>1 page object per page of site or app</li>
+				<li>Page objects extend <pre style="display:inline; color:red;"><span style="font-size:30px;">PageBase</pre> class, <pre style="display:inline; color:red;"><span style="font-size:30px;">TestBase</pre> class instantiates page object</li>
+			</ol>
+		</section>
+
 		<section>
 				<h3>POM Example</h3>
 				<p>Before Abstracted:
@@ -1269,82 +1539,17 @@ In this specific example, when an operation is performed on an element the wait 
 </ul>
 	</aside>
 		</section>
-		<section>
-		  <h3>Converting a Simple Script</h3>
-		  <ol>
-		    <li>Open basic scripts</li>
-		    <li>Identify code that fits into at least 3 different sections</li>
-		    <ul>
-		      <li>Set-up</li>
-		      <li>Test(s)</li>
-		      <li>Teardown</li>
-		    </ul>
-		    <li>Separate the different parts into functions with the appropriate annotations</li>
-		    <li>Analyze script for any repetitive identifications or actions and store values/actions in variables</li>
-		  </ol>
-		  <aside class="java">
-		    <p></p>
-		  </aside>
-		</section>
-
-		<section>
-		  <section>
-		    <h3>Example Script</h3>
-		    <p>Parts of a complete test framework abstracted script</p>
-		    <div style="text-align:center;"><img style="width:75%;" src="assets/images/pre-abstract.png"></img></div>
-		  </section>
-		  
-		  <section>
-		    <h3>Abstracted Script</h3>
-		    <p>Parts of a complete test framework abstracted script</p>
-		    <div style="text-align:center;"><img style="width:73%;" src="assets/images/after-abstract.png"></img></div>
-		  </section>
-		  
-		  <section>
-		    <h3>Example 1</h3>
-		    <p>Before:</p>
-		    <pre><code class="java" data-trim contenteditable>
-			driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
-...
-driver.findElement(By.xpath("//div[2]/div/div/div/button")).click();
-		    </code></pre>
-		    <p>After:</p>
-		    <pre style="width:101%;"><code class="java" data-trim contenteditable>
-			WebElement button = driver.findElement(By.xpath("//div[2]/div/div/div/button"));
-button.click();
-...
-button.click();
-		    </code></pre>
-		    
-		  </section>
 		
-		  <section>
-		    <h3>Example 2</h3>
-		    <p>Before:</p>
-		    <pre><code class="java" data-trim contenteditable>
-		      WebElement hoverElement = driver.findElement(By.id("button"));
-Actions builder = new Actions(driver);
-
-builder.moveToElement(hoverElement).build().perform();
-		    </code></pre>
-		  
-		    <p>After:</p>
-		  <pre style="width:94%;"><code class="java" data-trim contenteditable>
-		      WebElement hoverElement = driver.findElement(By.id("btn1"));
-Action hoverBtn1 = new Actions(driver).moveToElement(hoverElement).build();
-			 
-hoverBtn1.perform();
-		  </code></pre>
-		</section>
-		   </section>
 		  
 		  <section data-state="lab">
 		  <h3>Lab 5: Page Objects and Abstraction</h3>
 		  <ol>
-		    <li>Note that all setup, teardown, and test methods are placed in a separate script</li>
-		    <li>Create page object methods that extends the PageBase.java logic</li>
-		    <li>Instantiate the page object in MyTestCase.java</li>
-		    <li>Save and Run test</li>
+		    <li>Open <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">MyPageObject.java</pre></li>
+		    <li>Create a constructor with <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">PageFactory.initElements</pre> as the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">return</pre> value.</li>
+		    <li>Uncomment/create public methods to capture the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">checkedCheckBox</pre> and <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">uncheckedCheckBox</pre> states</li>
+		    <li>Open <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">MyTestCase.java</pre></li>
+		    <li>Instantiate <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">MyPageObject</pre> class and test the check the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">uncheckedCheckBox</pre> state</li>
+		    <li>Run the test and check the results in <a href="https://saucelabs.com">Saucelabs.com</a></li>
 		  </ol>
 		  <aside class ="notes">
 <p>Sections that are missing in MyPageObject.java</p>
@@ -1483,9 +1688,10 @@ public static Object[][] sauceBrowserDataProvider(Method testMethod) {
 		<section data-state="lab">
 		  <h3>Lab 6: Parallelization Lab</h3>
 		  <ol>
-		    <li>Add more browser combinations via the @DataProvider</li>
-		    <li>Move all tests into separate classes, and retain local thread in base class</li>
-		    <li>Run Parallel tests</li>
+		    <li>Open <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">MyParrallelTestCase.java</pre></li>
+		    <li>Uncomment the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@DataProvider</pre> method</li>
+		    <li>Reference the name of the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@DataProvider</pre> in the <pre style="display:inline; color:rgb(87,193,232);"><span style="font-size: 30px;">@Test</pre> class method</li>
+		    <li>Run the parallel tests and check the results in <a href="https://saucelabs.com">Saucelabs.com</a></li>
 		  </ol>
 		  <aside class="notes">
 		  	<p>Sections missing in MyParallelTestCase.java</p>
